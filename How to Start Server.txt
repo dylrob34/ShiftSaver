@@ -1,0 +1,3 @@
+Run this command in this window, or if on windows run Start.bat
+
+SET DEBUG=ShiftSaver:* & npm start

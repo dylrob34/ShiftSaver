@@ -1,0 +1,3 @@
+SET DEBUG=ShiftSaver:* & npm start
+echo Starting Shift Saver...
+pause
