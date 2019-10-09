@@ -1,0 +1,15 @@
+{
+  "name": "shitsaverelectron",
+  "version": "1.0.0",
+  "description": "Electron Version of the Shift Saver Web App",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^6.0.12"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Dylan Anderson",
+  "license": "MIT"
+}
