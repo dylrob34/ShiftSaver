@@ -1,25 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Calendar from 'react-calendar';
+import Calendar from './Calendar.js';
+import Login from './login.js';
 
-class MyApp extends React.Component {
-  state = {
-    date: new Date(),
+class ShiftSaver extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      loggedIn: false,
+    }
+    this.onLogin = this.onLogin.bind(this);
   }
 
-  onChange = date => this.setState({ date })
+  onLogin(e) {
+    this.state.setState({loggedIn:e});
+  }
 
   render() {
+    let toView;
+    if (!this.loggenIn) {
+      toView = <Login onLoggedIn={this.onLogin}/>;
+    } else {
+      toView =  <Calendar />
+    }
+
     return (
       <div>
-        <Calendar
-          onChange={this.onChange}
-          value={this.state.date}
-        />
+        {toView}
       </div>
     );
+
   }
+
 }
 
-export default MyApp;
+export default ShiftSaver;
