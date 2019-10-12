@@ -1,0 +1,54 @@
+.loginDiv {
+    position: absolute;
+    width: 20%;
+    height: 40%;
+    background-color: red;
+    border: 3px rgb(80, 76, 76) solid;
+    border-radius: 7px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    max-width: 300px;
+    max-height: 375px;
+}
+
+.loginDiv button {
+    text-align: center;
+    margin-top: 8px;
+    width: 75%;
+    padding: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'roboto';
+}
+
+.loginDiv button:hover {
+    background-color: white;
+}
+
+.usernameDiv {
+    margin-bottom: 5px;
+}
+
+.passwordDiv {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.loginForm input {
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#welcomeText {
+    color: black;
+}

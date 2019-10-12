@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Calendar from './Calendar.js';
+import Main from './Main.js';
 import Login from './login.js';
 
 class ShiftSaver extends React.Component {
@@ -15,16 +14,11 @@ class ShiftSaver extends React.Component {
   }
 
   onLogin(e) {
-    this.state.setState({loggedIn:e});
+    this.setState({loggedIn:e});
   }
 
   render() {
-    let toView;
-    if (!this.loggenIn) {
-      toView = <Login onLoggedIn={this.onLogin}/>;
-    } else {
-      toView =  <Calendar />
-    }
+    var toView = !this.state.loggedIn ? <Login onLoggedIn={this.onLogin}/>:<Main />;
 
     return (
       <div>

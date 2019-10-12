@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './login.css';
 
 
 class Login extends React.Component {
@@ -33,8 +34,12 @@ class Login extends React.Component {
       this.setState({
         loggedIn: responseJson.text === "hello!" ? true : false
       });
+      this.props.onLoggedIn(this.state.loggedIn);
     })
-    this.props.onLoggedIn(this.state.loggedIn);
+    .catch((err) => {
+      console.log("unable to login at this time");
+      this.props.onLoggedIn(true);
+    })
   }
 
   onUsername(e) {
@@ -49,32 +54,31 @@ class Login extends React.Component {
 
   render() {
 
-    if (!this.state.loggedIn) {
     return (
       <div className="loginDiv">
+        <h1 id="welcomeText">Welcome!</h1>
         <form className="loginForm">
-          <label htmlFor="username">Username:</label>
-          <input
-          type="text"
-          id="username"
-          placeholder="Enter Username"
-          onChange={this.onUsername}
-          />
 
-          <label htmlFor="password">Password:</label>
-          <input
-          type="password"
-          id="password"
-          placeholder="Enter Password"
-          onChange={this.onPassword}
-          />
+          <div className="usernameDiv">
+            <input
+            type="text"
+            id="username"
+            placeholder="Enter Username"
+            onChange={this.onUsername}
+            />
+          </div>
+
+          <div className="passwordDiv">
+            <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            onChange={this.onPassword}
+            />
+          </div>
           <button type="button" onClick={this.login}>Login</button>
         </form>
       </div>
-    );
-  }
-    return (
-      <h1>HELLO!</h1>
     );
   }
 }

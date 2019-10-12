@@ -1,0 +1,2 @@
+maybe install hapi/joi for JSON validation
+maybe bcryptjs for password hashing
