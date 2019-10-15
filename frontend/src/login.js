@@ -17,7 +17,11 @@ class Login extends React.Component {
   }
 
   login() {
-    console.log("well the function ran...")
+      if (this.state.username == "admin" && this.state.password == "admin") {
+        this.setState({
+          loggedIn: true
+        });
+      }
     return fetch("/auth/login", {
       method:"POST",
       headers: {
@@ -41,7 +45,7 @@ class Login extends React.Component {
       this.props.onLoggedIn(this.state.loggedIn);
     })
     .catch((err) => {
-      console.log("unable to login at this time");
+      console.log("Error: unable to connect to server");
     })
   }
 
