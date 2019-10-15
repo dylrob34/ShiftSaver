@@ -18,7 +18,7 @@ class Login extends React.Component {
 
   login() {
     console.log("well the function ran...")
-    return fetch("/login", {
+    return fetch("/auth/login", {
       method:"POST",
       headers: {
         Accept: 'application/json',
@@ -31,14 +31,17 @@ class Login extends React.Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      this.setState({
-        loggedIn: responseJson.text === "hello!" ? true : false
+      if (responseJson.error == true) {
+          console.log("Error: idk");
+      } else {
+        this.setState({
+          loggedIn: responseJson.login
       });
+      }
       this.props.onLoggedIn(this.state.loggedIn);
     })
     .catch((err) => {
       console.log("unable to login at this time");
-      this.props.onLoggedIn(true);
     })
   }
 

@@ -9,10 +9,4 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-router.post('/login', function(req, res, next) {
-  console.log(req.body);
-  js = {text:"hello!"}
-  res.json(js);
-});
-
 module.exports = router;
