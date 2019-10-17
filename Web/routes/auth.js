@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var env = require('dotenv');
+var jwt = require('jsonwebtoken');
 
 
 var connection = mysql.createConnection({
@@ -19,7 +20,7 @@ connection.connect(function(error) {
   }
 });
 
-/* GET users listing. */
+/* POST to login url: /auth/login */
 router.post('/login', function(req, res, next) {
   connection.query("SELECT * FROM employee WHERE first_name='" + req.body.username + "'", function(error, result, fields) {
     if (error || result[0]==null) {
