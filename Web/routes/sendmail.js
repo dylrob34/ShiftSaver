@@ -1,24 +1,29 @@
 var nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'shiftsaver2019@gmail.com',
-        pass: 'Swe2019!'
-    }
-});
+function sendmail(mailto) {
+    console.log(mailto)
+    
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'sweshiftsaver@gmail.com',
+            pass: 'lucaswetherall'
+        }
+    });
+    
+    var mailOptions = {
+        from: 'sweshiftsaver@gmail.com',
+        to: mailto, //this should be dynamically grabbed from session and/or database
+        subject: 'Weekly Shift',
+        text: 'Here is your schedule for the week: '
+    };
 
-var mailOptions = {
-    from: 'shiftsaver2019@gmail.com',
-    to: 'lucaswetherall@yahoo.com', //this should be dynamically grabbed from session and/or database
-    subject: 'Weekly Shift',
-    text: 'That was easy!'
-};
-
-transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log('Email sent: ' + info.response);
-    }
-});
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+}
+module.exports = sendmail;
