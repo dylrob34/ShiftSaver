@@ -13,7 +13,8 @@ var dotenv = require('dotenv');
 dotenv.config();
 
 var indexRouter = require('./routes/index');
-var authRouter = require('./routes/auth');
+var authRouter = require('./routes/auth').router;
+var sendMail = require('./routes/sendmail');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 // });
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/sendmail', sendMail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
