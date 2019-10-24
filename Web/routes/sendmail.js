@@ -7,36 +7,19 @@ var verifyToken = require('./auth.js').verifyToken;
 var jwt = require('jsonwebtoken');
 var application = require('../database/application');
 
-
-
-var connection = mysql.createConnection({
-    host     : process.env.DB_HOST,
-    user     : process.env.DB_USER,
-    password : process.env.DB_PASSWORD,
-    database : process.env.DB_DB,
-  });
-  
-  connection.connect(function(error) {
-    if (error) {
-      console.log("Error: could not connect to database...");
-    }
-  });
-
 /* POST to login url: /auth/login */
-router.post('/', verifyToken, function (req, res) {
-    jwt.verify(req.token, process.env.secretKey, async (err, authData) => {
+router.post('/', verifyToken, async function (req, res) {
+    jwt.verify(req.token, process.env.secretKey, async function(err, authData) {
         if (err) {
             res.json({error: true});
         } else {
-            console.log('user_id', authData.user);
             var email = await application.getEmail(authData.user);
-            console.log("email is", email);
             if (email == false || typeof email == "undefined") {
                 console.log("Error: idk");
                 res.json({ error: true });
             } else {
                 if (email != "") {
-                    sendMail(user);         
+                    sendMail(email);
                     res.json({ error: false, sent: true });
                 } else {
                     res.json({ error: false, sent: false });
@@ -48,7 +31,7 @@ router.post('/', verifyToken, function (req, res) {
 
 function sendMail(mailto) {
     console.log(mailto)
-    
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -56,12 +39,12 @@ function sendMail(mailto) {
             pass: 'lucaswetherall'
         }
     });
-    
+
     var mailOptions = {
         from: 'sweshiftsaver@gmail.com',
-        to: sendMail, //this should be dynamically grabbed from session and/or database
-        subject: 'HA',
-        text: 'Spam Lucas'
+        to: mailto, //this should be dynamically grabbed from session and/or database
+        subject: 'Your Weekly Shifts',
+        text: 'Your shifts for the week...'
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

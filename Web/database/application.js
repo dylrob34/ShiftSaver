@@ -8,36 +8,44 @@ function getEmployee(id) {
     return dataMethods.getEmployee(id);
 }
 
-function getFirstName(id) {
-    return dataMethods.getEmployee(id).first_name;
+async function getFirstName(id) {
+    var result = await getEmployee(id);
+    return result.first_name;
 }
 
-function getLastName(id) {
-    return dataMethods.getEmployee(id).last_name;
+async function getLastName(id) {
+    var result = await getEmployee(id);
+    return result.last_name;
 }
 
-function getMiddleInitial(id) {
-    return dataMethods.getEmployee(id).mid_initial;
+async function getMiddleInitial(id) {
+    var result = await getEmployee(id);
+    return result.mid_initial;
 }
 
-function getJobTitle(id) {
-    return dataMethods.getEmployee(id).job_title;
+async function getJobTitle(id) {
+    var result = await getEmployee(id);
+    return result.job_title;
 }
 
-function getMobileNumber(id) {
-    return dataMethods.getEmployee(id).mobile_number;
+async function getMobileNumber(id) {
+    var result = await getEmployee(id);
+    return result.mobile_number;
 }
 
-function getEmail(id) {
-    return dataMethods.getEmployee(id).email;
+async function getEmail(id) {
+    var result = await dataMethods.getEmployee(id);
+    return result.email;
 }
 
-function getIsManager(id) {
-    return dataMethods.getEmployee(id).is_manager;
+async function getIsManager(id) {
+    var result = await getEmployee(id);
+    return result.is_manager;
 }
 
-function getIsAdmin(id) {
-    return dataMethods.getEmployee(id).is_admin;
+async function getIsAdmin(id) {
+    var result = await getEmployee(id);
+    return result.is_admin;
 }
 
 module.exports = {
