@@ -1,4 +1,4 @@
 maybe install hapi/joi for JSON validation
 maybe bcryptjs for password hashing
 JWT for authenticating api requests
-Business, application? and data layers of backend
+Business, application? and data layers of backend-----IN PROGRESS

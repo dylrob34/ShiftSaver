@@ -1,0 +1,98 @@
+const env = require('dotenv');
+const mysql = require('mysql');
+
+var connection = mysql.createConnection({
+    host     : process.env.DB_HOST,
+    user     : process.env.DB_USER,
+    password : process.env.DB_PASSWORD,
+    database : process.env.DB_DB,
+});
+  
+connection.connect(function(error) {
+    if (error) {
+        console.log("Error: could not connect to database...");
+    } else {
+        console.log("Connected to Database");
+    }
+});
+
+function getEmployee(id) {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM employee WHERE employee_id='" + id + "'", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });
+}
+
+function getEmployees() {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM employee", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });
+}
+
+  function getShiftRecordById(shift) {
+    return new Promise( (resolve, reject) => {
+        connection.query("SELECT * FROM shift_record WHERE shift_id='" + shift + "'", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });  
+  }
+
+  function getShiftRecordByDate(shift_Date) {
+    return new Promise( (resolve, reject) => {
+        connection.query("SELECT * FROM shift_record WHERE shift_date='" + shift_date + "'", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });
+  }
+
+  function getShifts() {
+    return new Promise( (resolve, reject) => {
+        connection.query("SELECT * FROM shift_record", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });
+  }
+
+  function getAddress(employee) {
+    return new Promise( (resolve, reject) => {
+        connection.query("SELECT * FROM shift_record WHERE employee_id='" + employee + "'", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });
+  }
+
+  module.exports = {
+      getAddress,
+      getEmployee,
+      getEmployees,
+      getShiftRecordById,
+      getShiftRecordByDate,
+      getShifts
+  };

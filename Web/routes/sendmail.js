@@ -5,6 +5,7 @@ var env = require('dotenv');
 var nodemailer = require('nodemailer');
 var verifyToken = require('./auth.js').verifyToken;
 var jwt = require('jsonwebtoken');
+var application = require('../database/application');
 
 
 
@@ -23,24 +24,24 @@ var connection = mysql.createConnection({
 
 /* POST to login url: /auth/login */
 router.post('/', verifyToken, function (req, res) {
-    jwt.verify(req.token, process.env.secretKey, (err, authData) => {
+    jwt.verify(req.token, process.env.secretKey, async (err, authData) => {
         if (err) {
             res.json({error: true});
         } else {
-            connection.query("SELECT * FROM employee WHERE employee_id='" + authData.user + "'", (error, result) => {
-                user = result[0];
-                if (error || user == null) {
-                    console.log("Error: idk");
-                    res.json({ error: true });
+            console.log('user_id', authData.user);
+            var email = await application.getEmail(authData.user);
+            console.log("email is", email);
+            if (email == false || typeof email == "undefined") {
+                console.log("Error: idk");
+                res.json({ error: true });
+            } else {
+                if (email != "") {
+                    sendMail(user);         
+                    res.json({ error: false, sent: true });
                 } else {
-                    if (user.email != "") {
-                        sendMail(user.email);         
-                        res.json({ error: false, sent: true });
-                    } else {
-                        res.json({ error: false, sent: false });
-                    }
+                    res.json({ error: false, sent: false });
                 }
-            });
+            }
         }
     });
 });
