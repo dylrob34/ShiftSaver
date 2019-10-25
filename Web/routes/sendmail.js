@@ -13,13 +13,15 @@ router.post('/', verifyToken, async function (req, res) {
         if (err) {
             res.json({error: true});
         } else {
-            var email = await application.getEmail(authData.user);
+            var email = await application.getEmail(req.body.to);
             if (email == false || typeof email == "undefined") {
                 console.log("Error: idk");
                 res.json({ error: true });
             } else {
                 if (email != "") {
-                    sendMail(email);
+                    sendMail(email,
+                             req.body.subject,
+                             req.body.text);
                     res.json({ error: false, sent: true });
                 } else {
                     res.json({ error: false, sent: false });
@@ -29,7 +31,7 @@ router.post('/', verifyToken, async function (req, res) {
     });
 });
 
-function sendMail(mailto) {
+function sendMail(mailto, subject, text) {
     console.log(mailto)
 
     var transporter = nodemailer.createTransport({
@@ -43,8 +45,8 @@ function sendMail(mailto) {
     var mailOptions = {
         from: 'sweshiftsaver@gmail.com',
         to: mailto, //this should be dynamically grabbed from session and/or database
-        subject: 'Your Weekly Shifts',
-        text: 'Your shifts for the week...'
+        subject: subject,
+        text: text
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
