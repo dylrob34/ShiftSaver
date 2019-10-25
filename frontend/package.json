@@ -2,7 +2,6 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage":"./",
   "dependencies": {
     "react": "^16.10.2",
     "react-calendar": "^2.19.2",

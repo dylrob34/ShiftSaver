@@ -1,0 +1,1 @@
+add "homepage":"./", to package.json in front end to work with electron

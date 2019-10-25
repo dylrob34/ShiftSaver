@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var env = require('dotenv');
 var jwt = require('jsonwebtoken');
-var application = require('../database/application');
+var business = require('../database/business');
 
 /* POST to login url: /auth/login */
 router.post('/login', async function(req, res) {
-  var user = await application.getEmployee(req.body.username);
+  var user = await business.getEmployee(req.body.username);
   console.log("user", user);
   if (user === false || (typeof user) == "undefined") {
     console.log("Error: idk");

@@ -5,6 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
+var cors = require('cors');
+
+corsOptions = {
+  origin: "http://localhost:3000"
+}
 
 //this package is to access the .env file so we can
 //hide the database login info, use:
@@ -27,6 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors(corsOptions));
 
 // app.get('/', function(req, res) {
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));

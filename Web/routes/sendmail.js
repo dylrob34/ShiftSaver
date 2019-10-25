@@ -5,7 +5,7 @@ var env = require('dotenv');
 var nodemailer = require('nodemailer');
 var verifyToken = require('./auth.js').verifyToken;
 var jwt = require('jsonwebtoken');
-var application = require('../database/application');
+var business = require('../database/business');
 
 /* POST to login url: /auth/login */
 router.post('/', verifyToken, async function (req, res) {
@@ -13,7 +13,7 @@ router.post('/', verifyToken, async function (req, res) {
         if (err) {
             res.json({error: true});
         } else {
-            var email = await application.getEmail(req.body.to);
+            var email = await business.getEmail(req.body.to);
             if (email == false || typeof email == "undefined") {
                 console.log("Error: idk");
                 res.json({ error: true });
