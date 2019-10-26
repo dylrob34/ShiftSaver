@@ -1,1 +1,15 @@
 add "homepage":"./", to package.json in front end to work with electron
+
+the json data to create a new user in postman:
+{
+	"employee_id":"1111",
+    "first_name":"Lucas",
+    "last_name":"Wetherall",
+    "middle_initial":"M",
+    "job_title":"peon",
+    "phone":"2037510355",
+    "email":"lucaswetherall@yahoo.com",
+    "manager":"true",
+    "admin":"false"
+
+}
