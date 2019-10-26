@@ -88,11 +88,34 @@ function getEmployees() {
     });
   }
 
+  function createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin) {
+    return new Promise( (resolve, reject) => {
+        connection.query("INSERT INTO employee values ("
+            + employee_id + ","
+            + "'" + first_name + "'" + ","
+            + "'" + last_name + "'" + ","
+            + "'" + middle_inital + "'" + ","
+            + "'" + job_title + "'" + ","
+            + phone + ","
+            + "'" + email + "'" + ","
+            + manager + ","
+            + admin
+            + ")", (error, result) => {
+            if (error) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    });
+  }
+
   module.exports = {
       getAddress,
       getEmployee,
       getEmployees,
       getShiftRecordById,
       getShiftRecordByDate,
-      getShifts
+      getShifts,
+      createEmployee
   };
