@@ -1,15 +1,16 @@
 import React from 'react';
 import Calendar from './Calendar';
-import './Main.css';
+import './static/css/Main.css';
+import Selector from "./Selector";
 
 class Main extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
           <div className="mainDiv">
+              <div>
+                  <Selector />
+              </div>
               <div className="calendarDiv">
                   <Calendar />
               </div>

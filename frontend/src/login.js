@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './login.css';
+import './static/css/login.css';
 
 
 class Login extends React.Component {
@@ -17,7 +16,7 @@ class Login extends React.Component {
   }
 
   login() {
-      if (this.state.username == "admin" && this.state.password == "admin") {
+      if (this.state.username === "admin" && this.state.password === "admin") {
         this.setState({
           loggedIn: true
         });
@@ -35,7 +34,7 @@ class Login extends React.Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      if (responseJson.error == true) {
+      if (responseJson.error === true) {
           console.log("Error: idk");
       } else {
         this.setState({
