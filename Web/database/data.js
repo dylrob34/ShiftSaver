@@ -20,7 +20,7 @@ function getEmployee(id) {
     return new Promise((resolve, reject) => {
         connection.query("SELECT * FROM employee WHERE employee_id='" + id + "'", (error, result) => {
             if (error) {
-                return reject(false);
+                resolve(false);
             } else {
                 resolve(result[0]);
             }

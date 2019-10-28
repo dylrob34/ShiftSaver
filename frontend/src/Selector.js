@@ -15,11 +15,16 @@ class Selector extends React.Component {
 
 
     render() {
+        var listStyle = {
+            listStyleType:"none"
+        };
         return(
-            <ul style={{ "list-style-type":"none" }}>
-                <li onClick={() => this.changePage("calendar")} >Calendar</li>
-                <li onClick={() => this.changePage("people")} >People</li>
-            </ul>
+            <div className="selectorDiv">
+                <ul style={listStyle}>
+                    <li onClick={() => this.changePage("calendar")} >Calendar</li>
+                    <li onClick={() => this.changePage("people")} >People</li>
+                </ul>
+            </div>
         );
     }
     

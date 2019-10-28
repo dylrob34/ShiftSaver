@@ -34,4 +34,21 @@ router.post('/create', verifyToken, (req, res) => {
     });
 });
 
+router.get('/getMyName', verifyToken, async (req, res) => {
+    console.log("running the route?");
+    jwt.verify(req.token, process.env.secretKey, async (err, authData) => {
+        if (err) {
+            console.log("error");
+            res.json({name:"ERROR"});
+        } else {
+            const name = await business.getFirstName(authData.employee_id);
+            console.log("got name");
+            if (name === false) {
+                console.log("returned false");
+            }
+            res.json({name});
+        }
+    });
+});
+
 module.exports = router;

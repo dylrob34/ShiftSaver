@@ -17,9 +17,8 @@ class Login extends React.Component {
 
   login() {
       if (this.state.username === "admin" && this.state.password === "admin") {
-        this.setState({
-          loggedIn: true
-        });
+        this.props.onLoggedIn(true);
+        return;
       }
     return fetch("http://localhost/auth/login", {
       method:"POST",
