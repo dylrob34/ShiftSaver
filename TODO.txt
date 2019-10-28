@@ -2,6 +2,7 @@ bcryptjs for password hashing-------------------------ill do that too
 Business, application? and data layers of backend-----IN PROGRESS by dylan
 the entire front end...
 organize front end into relevant folders
+add models so a query from a route returns an object not just data
 
 --might-- wanna use redux for login state. Any actions, meaning response from
 api saying ur not logged in, can change the state to logged off, which calls
