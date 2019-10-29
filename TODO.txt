@@ -9,3 +9,7 @@ add bootstrap
 --might-- wanna use redux for login state. Any actions, meaning response from
 api saying ur not logged in, can change the state to logged off, which calls
 a callback to render the app from the top showing login page.
+
+figured out why front end couldnt grab name, key is not being saved and
+sent with the request, the verifyKey middleware is stopping the req
+and sending back {error: true} before it even reaches the route
