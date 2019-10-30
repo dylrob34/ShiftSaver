@@ -34,25 +34,38 @@ async function getMobileNumber(id) {
 }
 
 async function getEmail(id) {
+    var validEmailRegex = \b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b;
     var result = await dataMethods.getEmployee(id);
-    return result.email;
+    if (validEmailRegex.test(result.email)) {
+        return result.email;
+    } else {
+        return "invalid email stored in database please contact an admin";
+    }
+       
 }
 
 async function getIsManager(id) {
     var result = await dataMethods.getEmployee(id);
-    return result.is_manager;
+    return result.is_manager == 1;
 }
 
 async function getIsAdmin(id) {
     var result = await dataMethods.getEmployee(id);
-    return result.is_admin;
+    return(result.is_admin == 1);
+  
 }
 
-async function createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin) {
-    var result = await dataMethods.createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin);
-    return result;
-}
+async function createEmployee(selfid, employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin) {
+    var validEmailRegex = \b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b;
+    if (getIsManager(selfid) || getIsAdmin(selfid) && validEmailRegex.test(email)) {
+        var result = await dataMethods.createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin);
 
+        return result;
+    } else {
+        console.log('Someone without access tried to create an employee and did not have permission to do so')
+        return {error : 'An employee was not able to be created in the database because you do not have permission to do so'}
+    }
+}
 module.exports = {
     getEmployees,
     getEmployee,
