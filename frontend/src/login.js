@@ -1,21 +1,26 @@
 import React from 'react';
 import './static/css/login.css';
+import {updateLoginState} from './MessageStore';
 
+export var userToken;
 
-class Login extends React.Component {
+export class Login extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
        username:"",
        password:"",
-       loggedIn:false
+       loggedIn:false,
     };
     this.onUsername = this.onUsername.bind(this);
     this.onPassword = this.onPassword.bind(this);
     this.login = this.login.bind(this);
+
   }
 
-  login() {
+
+login() {
       if (this.state.username === "admin" && this.state.password === "admin") {
         this.props.onLoggedIn(true);
         return;
@@ -25,6 +30,7 @@ class Login extends React.Component {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        
       },
       body: JSON.stringify({
         username: this.state.username,
@@ -35,17 +41,26 @@ class Login extends React.Component {
     .then((responseJson) => {
       if (responseJson.error === true) {
           console.log("Error: idk");
+          
       } else {
+        console.log(responseJson.token)
+        userToken = responseJson.token
+        updateLoginState(responseJson.login);
         this.setState({
-          loggedIn: responseJson.login
+          loggedIn: responseJson.login,
+
       });
       }
-      this.props.onLoggedIn(this.state.loggedIn);
-    })
+      // this.props.onLoggedIn(this.state.loggedIn);
+    }
+    )
     .catch((err) => {
       console.log("Error: unable to connect to server");
     })
+
   }
+
+ 
 
   onUsername(e) {
     e.preventDefault();
@@ -59,10 +74,13 @@ class Login extends React.Component {
 
   render() {
 
+
     return (
       <div className="loginDiv">
         <h1 id="welcomeText">Welcome!</h1>
         <form className="loginForm">
+
+        
 
           <div className="usernameDiv">
             <input
@@ -88,4 +106,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Login; 

@@ -1,7 +1,8 @@
 import React from 'react';
 import './static/css/App.css';
 import Main from './Main.js';
-import Login from './login.js';
+import Login from "./login"
+import {subscribe, getLoginState} from './MessageStore';
 
 class ShiftSaver extends React.Component {
   constructor(props) {
@@ -11,10 +12,13 @@ class ShiftSaver extends React.Component {
       loggedIn: false,
     }
     this.onLogin = this.onLogin.bind(this);
+    console.log("subscribing");
+    subscribe(this.onLogin);
   }
 
-  onLogin(e) {
-    this.setState({loggedIn:e});
+  onLogin() {
+    const login = getLoginState();
+    this.setState({loggedIn:login});
   }
 
   render() {

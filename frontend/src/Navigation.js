@@ -1,11 +1,22 @@
 import React from "react";
+import {updateLoginState} from './MessageStore';
 
 class Navigation extends React.Component {
+
+    logout() {
+        updateLoginState(false);
+    }
+
+
     render() {
         return(
             <div>
                 <h1>Hello {this.props.name}!</h1>
-                <button>Logout, needs to be implemented</button>
+
+                <button onClick={this.logout}>
+  Logout
+</button>
+                
             </div>
         );
     }
