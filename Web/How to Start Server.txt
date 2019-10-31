@@ -1,6 +1,0 @@
-Run this command in this window, or if on windows run Start.bat
-
-SET DEBUG=ShiftSaver:* & npm start
-
-jsx preprocessor start command:
-npx babel --watch src --out-dir ./public/javascripts --presets react-app/prod
