@@ -12,7 +12,6 @@ class ShiftSaver extends React.Component {
       loggedIn: false,
     }
     this.onLogin = this.onLogin.bind(this);
-    console.log("subscribing");
     subscribe(this.onLogin);
   }
 

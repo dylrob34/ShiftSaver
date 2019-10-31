@@ -11,10 +11,10 @@ export class Login extends React.Component {
     this.state = {
        username:"",
        password:"",
-       loggedIn:false,
     };
     this.onUsername = this.onUsername.bind(this);
     this.onPassword = this.onPassword.bind(this);
+
     this.login = this.login.bind(this);
 
   }
@@ -22,7 +22,7 @@ export class Login extends React.Component {
 
 login() {
       if (this.state.username === "admin" && this.state.password === "admin") {
-        this.props.onLoggedIn(true);
+        updateLoginState(true);
         return;
       }
     return fetch("http://localhost/auth/login", {
@@ -43,15 +43,9 @@ login() {
           console.log("Error: idk");
           
       } else {
-        console.log(responseJson.token)
         userToken = responseJson.token
         updateLoginState(responseJson.login);
-        this.setState({
-          loggedIn: responseJson.login,
-
-      });
       }
-      // this.props.onLoggedIn(this.state.loggedIn);
     }
     )
     .catch((err) => {

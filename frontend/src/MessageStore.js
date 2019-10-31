@@ -15,7 +15,6 @@ export function unsubscribe(callback) {
     emitter.removeListener('update', callback);
 }
 export function updateLoginState(state) {
-    console.log("updated");
     loginState = state;
     emitter.emit('update');
 }
