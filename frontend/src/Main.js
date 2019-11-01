@@ -28,7 +28,6 @@ class Main extends React.Component {
     }
 
     render() {
-
         return (
           <div className="mainDiv">
             <Navigation name={this.state.name}/>

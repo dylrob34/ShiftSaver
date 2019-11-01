@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var env = require('dotenv');
 var jwt = require('jsonwebtoken');
-var business = require('../database/business');
+var business = require('../models/business');
 
 /* POST to login url: /auth/login */
 router.post('/login', async function(req, res) {

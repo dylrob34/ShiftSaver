@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var verifyToken = require('./auth').verifyToken;
 var jwt = require('jsonwebtoken');
-var business = require("../database/business");
+var business = require("../models/business");
 
 router.post('/create', verifyToken, (req, res) => {
     jwt.verify(req.token, process.env.secretKey, async (err, authData) => {
@@ -35,14 +35,12 @@ router.post('/create', verifyToken, (req, res) => {
 });
 
 router.get('/getMyName', verifyToken, async (req, res) => {
-    console.log("running the route?");
     jwt.verify(req.token, process.env.secretKey, async (err, authData) => {
         if (err) {
             console.log("error");
             res.json({name:"ERROR"});
         } else {
             const name = await business.getFirstName(authData.employee_id);
-            console.log("got name");
             if (name === false) {
                 console.log("returned false");
             }

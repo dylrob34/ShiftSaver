@@ -5,7 +5,7 @@ var env = require('dotenv');
 var nodemailer = require('nodemailer');
 var verifyToken = require('./auth.js').verifyToken;
 var jwt = require('jsonwebtoken');
-var business = require('../database/business');
+var business = require('../models/business');
 
 /* POST to login url: /auth/login */
 router.post('/', verifyToken, async function (req, res) {
