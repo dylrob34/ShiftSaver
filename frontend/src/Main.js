@@ -27,12 +27,19 @@ class Main extends React.Component {
         })
     }
 
+    test() {
+        console.log("testing");
+        
+    }
+
     render() {
         return (
           <div className="mainDiv">
             <Navigation name={this.state.name}/>
             <Selector />
             <Calendar />
+
+            <button onClick={this.test}>test this shit out</button>
 
             <div className="upcomingShiftsDiv">
                 <h1>Upcoming Shifts</h1>
