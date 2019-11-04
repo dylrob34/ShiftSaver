@@ -22,19 +22,26 @@ class ShiftSaver extends React.Component {
   }
 
   onRegister(){
-    this.setState({register: true});
+    this.state.register ? this.setState({register:false}):this.setState({register:true});
   }
 
   render() {
-    var toView = !this.state.loggedIn ? <Login onLoggedIn={this.onLogin}/>:<Main />;
-    var showing = !this.state.register ? toView : <Registration />
 
-    return (
-      <div>
-        <button onClick= {this.onRegister} >Register</ button>
-        {showing}
-      </div>
-    );
+    if (!this.state.register) {
+        return (
+            <div>
+            <button onClick={this.onRegister} >Register</ button>
+            <Login onLoggedIn={this.onLogin}/>
+          </div>
+        );
+    } else {
+      return (
+        <div>
+          <button onClick={this.onRegister} >Register</button>
+          <Registration />
+        </div>
+      )
+    }
 
   }
 

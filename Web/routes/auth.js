@@ -45,7 +45,7 @@ router.get('/checkLogin', verifyToken, (req, res) => {
 //Creating New Account 
 
 router.post('/createAccount', async function(req, res){
-  
+  console.log("runnnig method");
   var chekcUser = business.getEmployee(req.body.username);
 
   if(chekcUser !== false){
@@ -54,8 +54,9 @@ router.post('/createAccount', async function(req, res){
   } else {
 
     var newUser = req.body
-    business.createEmployee(newUser.employeeID, newUser.firstName, newUser.lastName, newUser.middleInitila, 
-      newUser.job, newUser.phone, newUser.emai, newUser.accountType, false)
+    var result = await business.createEmployee(newUser.employeeID, newUser.firstName, newUser.lastName, newUser.middleInitila, 
+      newUser.job, newUser.phone, newUser.emai, newUser.accountType, false);
+    console.log(result);
 
     res.json({
       error: false,

@@ -93,6 +93,7 @@ export class Registration extends React.Component{
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
+        
         body: JSON.stringify({
             employeeID: this.employeeID,
             firstName: this.firstName,
