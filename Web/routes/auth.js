@@ -42,6 +42,29 @@ router.get('/checkLogin', verifyToken, (req, res) => {
 });
 
 
+//Creating New Account 
+
+router.post('/createAccount', async function(req, res){
+  
+  var chekcUser = business.getEmployee(req.body.username);
+
+  if(chekcUser !== false){
+    console.log("User Already Exist");
+    res.json({error:true});
+  } else {
+
+    var newUser = req.body
+    business.createEmployee(newUser.employeeID, newUser.firstName, newUser.lastName, newUser.middleInitila, 
+      newUser.job, newUser.phone, newUser.emai, newUser.accountType, false)
+
+    res.json({
+      error: false,
+    });
+    console.log("Account Created");
+  }
+});
+
+
 // FORMAT OF TOKEN
 // Authorization: Bearer <access_token>
 

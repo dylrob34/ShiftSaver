@@ -1,0 +1,25 @@
+.regiDiv {
+    position: absolute;
+    width: 40%;
+    height: 110%;
+    background-color: red;
+    border: 3px rgb(80, 76, 76) solid;
+    border-radius: 7px;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+}
+
+.regiBtn {
+    text-align: center;
+    margin-top: 8px;
+    width: 75%;
+    padding: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'roboto';
+}

@@ -5,7 +5,7 @@ class Navigation extends React.Component {
         return(
             <div>
                 <h1>Hello {this.props.name}!</h1>
-                <button>Logout, needs to be implemented</button>
+                <button><a href= "/frontend/login.js">Logout, needs to be implemented</a></button>
             </div>
         );
     }
