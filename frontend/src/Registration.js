@@ -1,36 +1,36 @@
 import React from 'react';
 import './static/css/Registration.css';
 
-export class Registration extends React.Component{
+class Registration extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             employeeID: "",
             firstName: "",
             lastName: "",
-            middleInitila: "",
+            middleInitial: "",
             job: "",
             phone: "",
             email: "",
             userName: "",
             password: "",
-            accountType: false,
+            accountType: false
         };
         this.onSelectingAccType = this.onSelectingAccType.bind(this);
-        this.onFirstName = this.onFirstName.bind(this)
-        this.onLastName = this.onLastName.bind(this)
-        this.onMiddleInitial = this.onMiddleInitial.bind(this)
-        this.onJobTitle = this.onJobTitle.bind(this)
-        this.onPhoneNumber = this.onPhoneNumber.bind(this)
-        this.onEmail = this.onEmail.bind(this)
-        this.onEmplyeeID = this.onEmplyeeID.bind(this)
-        this.onUserName = this.onUserName.bind(this)
-        this.onPassword = this.onPassword.bind(this)
+        this.onFirstName = this.onFirstName.bind(this);
+        this.onLastName = this.onLastName.bind(this);
+        this.onMiddleInitial = this.onMiddleInitial.bind(this);
+        this.onJobTitle = this.onJobTitle.bind(this);
+        this.onPhoneNumber = this.onPhoneNumber.bind(this);
+        this.onEmail = this.onEmail.bind(this);
+        this.onEmplyeeID = this.onEmplyeeID.bind(this);
+        this.onUserName = this.onUserName.bind(this);
+        this.onPassword = this.onPassword.bind(this);
     }
 
     onEmplyeeID(e){
       e.preventDefault();
-      this.setState({ userName: e.target.value });
+      this.setState({ employeeID: e.target.value });
     }
 
     onSelectingAccType(e){
@@ -39,10 +39,10 @@ export class Registration extends React.Component{
       var type = e.target.value;
 
       if (type === "manger" ){
-        this.setState({ accountType: true })
+        this.setState({ accountType: true });
       }
       else {
-        this.setState({ accountType: false })
+        this.setState({ accountType: false });
       }
     }
 
@@ -58,7 +58,7 @@ export class Registration extends React.Component{
 
     onMiddleInitial(e){
       e.preventDefault();
-      this.setState({ middleInitila: e.target.value });
+      this.setState({ middleInitial: e.target.value });
     }
     onJobTitle(e){
       e.preventDefault();
@@ -67,17 +67,17 @@ export class Registration extends React.Component{
 
     onPhoneNumber(e){
       e.preventDefault();
-      this.setState({phone: e.target.value})
+      this.setState({phone: e.target.value});
     }
 
     onEmail(e){
       e.preventDefault();
-      this.setState({ emai: e.target.value });
+      this.setState({ email: e.target.value });
     }
 
     onUserName(e){
       e.preventDefault();
-      this.setState({userName: e.target.value})
+      this.setState({userName: e.target.value});
     }
 
     onPassword(e){
@@ -86,7 +86,7 @@ export class Registration extends React.Component{
     }
 
     createAccount(){
-
+      console.log('creating account...');
       return fetch("http://localhost/auth/createAccount", {
         method:"POST",
         headers: {
@@ -95,19 +95,22 @@ export class Registration extends React.Component{
         },
         
         body: JSON.stringify({
-            employeeID: this.employeeID,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            middleInitila: this.middleInitila,
-            job: this.job,
-            phone: this.phone,
-            email: this.email,
-            userName: this.userName,
-            password: this.password,
-            accountType: this.accountType,
+            employeeID: this.state.employeeID,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            middleInitila: this.state.middleInitila,
+            job: this.state.job,
+            phone: this.state.phone,
+            email: this.state.email,
+            userName: this.state.userName,
+            password: this.state.password,
+            accountType: this.state.accountType,
         })
       })
       .then((response) => response.json())
+      .then((responseJSON) => {
+        console.log(responseJSON.error);
+      })
       .catch((err) => {
         console.log("Error: unable to connect to server");
       })
@@ -200,14 +203,14 @@ export class Registration extends React.Component{
               <p>Password</p>
               <input 
               type="text"
-              id="userName"
+              id="password"
               placeholder="Enter Password"
               onChange = {this.onPassword}
               />
 
               <br />
               <br />
-              <button className= "regiBtn" onClick = {this.createAccount}>Create Account !</button>
+              <button className= "regiBtn" type="button" onClick = {this.createAccount}>Create Account !</button>
 
 
             </form>
