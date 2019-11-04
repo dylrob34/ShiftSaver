@@ -26,6 +26,7 @@ class Registration extends React.Component{
         this.onEmplyeeID = this.onEmplyeeID.bind(this);
         this.onUserName = this.onUserName.bind(this);
         this.onPassword = this.onPassword.bind(this);
+        this.createAccount = this.createAccount.bind(this);
     }
 
     onEmplyeeID(e){
@@ -87,6 +88,7 @@ class Registration extends React.Component{
 
     createAccount(){
       console.log('creating account...');
+      console.log(this);
       return fetch("http://localhost/auth/createAccount", {
         method:"POST",
         headers: {
@@ -98,7 +100,7 @@ class Registration extends React.Component{
             employeeID: this.state.employeeID,
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            middleInitila: this.state.middleInitila,
+            middleInitial: this.state.middleInitial,
             job: this.state.job,
             phone: this.state.phone,
             email: this.state.email,

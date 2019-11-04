@@ -48,14 +48,14 @@ router.post('/createAccount', async function(req, res){
   console.log("runnnig method");
   var chekcUser = business.getEmployee(req.body.username);
 
-  if(chekcUser !== false){
+  if(chekcUser.employee_id === req.body.employeeID){
     console.log("User Already Exist");
     res.json({error:true});
   } else {
 
     var newUser = req.body
-    var result = await business.createEmployee(newUser.employeeID, newUser.firstName, newUser.lastName, newUser.middleInitila, 
-      newUser.job, newUser.phone, newUser.emai, newUser.accountType, false);
+    var result = await business.createEmployee(newUser.employeeID, newUser.firstName, newUser.lastName, newUser.middleInitial, 
+      newUser.job, Number(newUser.phone), newUser.email, newUser.accountType, false);
     console.log(result);
 
     res.json({
