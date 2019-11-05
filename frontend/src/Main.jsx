@@ -3,7 +3,7 @@ import Calendar from './Calendar';
 import './static/css/Main.css';
 import Selector from "./Selector";
 import Navigation from "./Navigation";
-import {userToken} from './login.js';
+import {userToken} from './Login';
 
 // The main page, gets shown when the user is logged in.
 // The rest of the app are children of this component

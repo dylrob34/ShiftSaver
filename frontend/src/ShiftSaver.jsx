@@ -1,7 +1,7 @@
 import React from 'react';
 import './static/css/App.css';
-import Main from './Main.js';
-import Login from "./login"
+import Main from './Main';
+import Login from "./Login"
 import {subscribe, getLoginState} from './MessageStore';
 
 // The Highest level of the application that does anything meaningfull. Displays the login page when the state of loggedIn is false.
