@@ -1,5 +1,7 @@
 add "homepage":"./", to package.json in front end to work with electron
 
+ALL buttons in forms need to be type="button", the default type is "submit", at least in chrome, whichsubmits the form and reloads the page which logs the person out, cancelling what they were doing.
+
 the json data to create a new user in postman:
 {
 	"employee_id":"1111",
