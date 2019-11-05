@@ -28,17 +28,9 @@ router.post('/login', async function(req, res) {
   }
 });
 
-router.get('/checkLogin', verifyToken, (req, res) => {
-  jwt.verify(req.token, process.env.secretKey, (err, authData) => {
-    if (err) {
-      res.json({error: true});
-    } else {
-      res.json({
-        error: false,
-        authData
-      });
-    }
-  });
+router.get('/checkLogin', verifyToken, async (req, res) => {
+  var name = await business.getFirstName(req.authData.employee_id);
+  res.json({name});
 });
 
 
@@ -51,7 +43,14 @@ function verifyToken(req, res, next) {
   if (typeof bearerHeader !== 'undefined') {
     const bearer = bearerHeader.split(" ");
     const bearerToken = bearer[1];
-    req.token = bearerToken;
+    
+    jwt.verify(bearerToken, process.env.secretKey, async (err, data) => {
+      if (err) {
+        res.json({loggedIn: false});
+      } else {
+        req.authData = data;
+      }
+    })
     next();
   } else {
     res.json({error: true});

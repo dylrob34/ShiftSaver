@@ -9,26 +9,20 @@ var business = require('../models/business');
 
 /* POST to login url: /auth/login */
 router.post('/', verifyToken, async function (req, res) {
-    jwt.verify(req.token, process.env.secretKey, async function(err, authData) {
-        if (err) {
-            res.json({error: true});
+    var email = await business.getEmail(req.body.to);
+    if (email == false || typeof email == "undefined") {
+        console.log("Error: idk");
+        res.json({ error: true });
+    } else {
+        if (email != "") {
+            sendMail(email,
+                    req.body.subject,
+                    req.body.text);
+            res.json({ error: false, sent: true });
         } else {
-            var email = await business.getEmail(req.body.to);
-            if (email == false || typeof email == "undefined") {
-                console.log("Error: idk");
-                res.json({ error: true });
-            } else {
-                if (email != "") {
-                    sendMail(email,
-                             req.body.subject,
-                             req.body.text);
-                    res.json({ error: false, sent: true });
-                } else {
-                    res.json({ error: false, sent: false });
-                }
-            }
+            res.json({ error: false, sent: false });
         }
-    });
+    }
 });
 
 function sendMail(mailto, subject, text) {
