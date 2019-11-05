@@ -7,6 +7,8 @@ var verifyToken = require('./auth.js').verifyToken;
 var jwt = require('jsonwebtoken');
 var business = require('../models/business');
 
+// route that sends an email to the person specified in the body.
+// body contains {to, subject, text}
 /* POST to login url: /auth/login */
 router.post('/', verifyToken, async function (req, res) {
     var email = await business.getEmail(req.body.to);
@@ -25,6 +27,7 @@ router.post('/', verifyToken, async function (req, res) {
     }
 });
 
+// function that actually sends the email
 function sendMail(mailto, subject, text) {
     console.log(mailto)
 

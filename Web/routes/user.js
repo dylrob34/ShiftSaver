@@ -4,6 +4,9 @@ var verifyToken = require('./auth').verifyToken;
 var jwt = require('jsonwebtoken');
 var business = require("../models/business");
 
+
+// creates a user. Required data in the body is shown below in the JSON object given to the createEmployee() method.
+// user needs to be logged in as a manager.
 router.post('/create', verifyToken, async (req, res) => {
     var user = await business.getEmployee(req.authData.employee_id);
     if (user.is_manager == 1) {
@@ -28,6 +31,9 @@ router.post('/create', verifyToken, async (req, res) => {
     }
 });
 
+
+// route returns the name of the current user as a JSON object of the format {name:"name"}
+// used in front end to greet user on the main page
 router.get('/getMyName', verifyToken, async (req, res) => {
     const name = await business.getFirstName(req.authData.employee_id);
     if (name === false) {

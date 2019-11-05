@@ -1,6 +1,6 @@
-const env = require('dotenv');
 const mysql = require('mysql');
 
+// creates connection string to the database. These credentials are in the .env file
 var connection = mysql.createConnection({
     host     : process.env.DB_HOST,
     user     : process.env.DB_USER,
@@ -8,6 +8,7 @@ var connection = mysql.createConnection({
     database : process.env.DB_DB,
 });
   
+// uses the connection string to establish a connection with the database
 connection.connect(function(error) {
     if (error) {
         console.log("Error: could not connect to database...");

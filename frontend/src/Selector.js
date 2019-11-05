@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Component that controls which page is visible, such as people or calender
 class Selector extends React.Component {
     constructor(props) {
         super(props);

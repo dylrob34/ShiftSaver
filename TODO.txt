@@ -1,15 +1,22 @@
 bcryptjs for password hashing
-Business, application? and data layers of backend-----IN PROGRESS by dylan
-the entire front end...
+
+Classes should be created for each table in the database. Each class should contain its own form validation so the business layer only has to validate authorization
+
+the entire front end...i added comments...good luck lol
+
 organize front end into relevant folders
-MAYBE add models so a query from a route returns an object not just data, idk if we need this
+
 add bootstrap maybe.
 
+Calender component needs to be updated for our needs, I figured it out just have to implement it.
 
-think we can avoid this, apparentely its a pain in the ass and there are simpler ways --MIGHT-- wanna use redux for login state.
- Any actions, meaning response from api saying ur not logged in, can change the state to logged off, which calls
-a callback to render the app from the top showing login page.
+Ervins create user form needs front end validation, other than that its good
 
-figured out why front end couldnt grab name, key is not being saved and
-sent with the request, the verifyKey middleware is stopping the req
-and sending back {error: true} before it even reaches the route
+Database tables need to be updated to have at least a password
+
+Week and Day view for the calendar, these are big, this is where shifts should be editable. Gonna wanna meet and discuss how the hell were going to pull this off
+
+Email forms need to be done, I asked anastasia, she never responded -_-
+i think i even used @anastasia
+
+someone with some sense of style should make this look good

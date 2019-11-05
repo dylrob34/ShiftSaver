@@ -5,6 +5,8 @@ import Selector from "./Selector";
 import Navigation from "./Navigation";
 import {userToken} from './login.js';
 
+// The main page, gets shown when the user is logged in.
+// The rest of the app are children of this component
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -13,6 +15,8 @@ class Main extends React.Component {
         };
     }
     
+    // "componentDidMount()" gets run when a component is loaded onto the screen, this method gets the name of the current user
+    // from the backend and displays a greeting.
     componentDidMount() {
         fetch("http://localhost/user/getMyName", {
             headers: {

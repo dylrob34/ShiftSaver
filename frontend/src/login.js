@@ -4,6 +4,10 @@ import {updateLoginState} from './MessageStore';
 
 export var userToken;
 
+// Component that handles login. Takes in callback function as property to change the state of the parent component.
+// Shows login form, when submit button is clicked, calls the login() function, that makes a post request to the back end sending username and password as body.
+// If the login is successful, saves the token contained in the response to the userToken variable which is exported for use by
+// any component that communicates with the backend.
 export class Login extends React.Component {
   
   constructor(props) {

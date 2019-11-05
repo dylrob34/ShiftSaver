@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 var business = require('../models/business');
 
 /* POST to login url: /auth/login */
+// this route is used to login, signed key is sent back in response, should be saved and sent with every request from the front end.
 router.post('/login', async function(req, res) {
   var user = await business.getEmployee(req.body.username);
   if (user === false || (typeof user) == "undefined") {
@@ -28,6 +29,8 @@ router.post('/login', async function(req, res) {
   }
 });
 
+
+// sends back the user Id if the person is succesfully logged in.
 router.get('/checkLogin', verifyToken, async (req, res) => {
   var name = await business.getFirstName(req.authData.employee_id);
   res.json({name});
@@ -36,7 +39,9 @@ router.get('/checkLogin', verifyToken, async (req, res) => {
 
 // FORMAT OF TOKEN
 // Authorization: Bearer <access_token>
-
+// This function checks for a token and if it is verified, adds the authorization data to the request and calls next();
+// if a valid key is not included in the request a response is sent back {loggedIn: false}
+// should be called as middleware on every route that gets or sets data in the database
 function verifyToken(req, res, next) {
   const bearerHeader = req.headers["authorization"];
 
