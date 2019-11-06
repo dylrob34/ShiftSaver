@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt');
 var verifyToken = require('./auth').verifyToken;
 var jwt = require('jsonwebtoken');
 var business = require("../models/business");
@@ -10,6 +11,11 @@ var business = require("../models/business");
 router.post('/create', verifyToken, async (req, res) => {
     var user = await business.getEmployee(req.authData.employee_id);
     if (user.is_manager == 1) {
+        var hashedPassword;
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+            hashedPassword = hash;
+        });
+        console.log(hashedPassword);
         response = await business.createEmployee(
             req.body.employee_id,
             req.body.first_name,
