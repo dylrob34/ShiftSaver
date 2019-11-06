@@ -25,7 +25,8 @@ router.post('/create', verifyToken, async (req, res) => {
             req.body.phone,
             req.body.email,
             req.body.manager,
-            req.body.admin
+            req.body.admin,
+            hashedPassword
         );
         if (response) {
             res.json({ success: true, error: false });

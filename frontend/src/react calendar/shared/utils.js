@@ -82,7 +82,6 @@ export const getTileClasses = ({
   }
 
   const valueRange = value instanceof Array ? value : getRange(valueType, value);
-
   if (isRangeWithinRange(valueRange, dateRange)) {
     classes.push(`${className}--active`);
   } else if (doRangesOverlap(valueRange, dateRange)) {

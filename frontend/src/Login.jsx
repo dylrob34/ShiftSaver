@@ -1,6 +1,8 @@
 import React from 'react';
 import './static/css/login.css';
 import {updateLoginState} from './MessageStore';
+import AlertDialog from './AlertDialog';
+
 
 export var userToken;
 
