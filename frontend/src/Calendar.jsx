@@ -14,7 +14,10 @@ class CalendarWidget extends React.Component {
     }
   }
 
-  onChange = date => this.setState({ date })
+  onChange = date => {
+    console.log("test");
+    this.setState({ date })
+  }
 
   render() {
     return (
