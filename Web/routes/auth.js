@@ -8,36 +8,29 @@ var business = require('../models/business');
 /* POST to login url: /auth/login */
 // this route is used to login, signed key is sent back in response, should be saved and sent with every request from the front end.
 router.post('/login', async function (req, res) {
-  var user = await business.getEmployee(req.body.username);
-  if (user === false || (typeof user) == "undefined") {
-    console.log("Error: idk");
-    res.json({ error: true });
-  } else {
-    bcrypt.compare(req.body.password, user.password, (err, result) => {
-      if (result) {
-        jwt.sign({ employee_id: user.employee_id }, process.env.secretKey, { expiresIn: "2h" }, (err, token) => {
-          if (err) {
-            console.log("signing error");
-            res.json({error: true});
-          } 
-          res.json({
-            error: false,
-            login: true,
-            token
-          });
-        });
-<<<<<<< HEAD
-      });
+    var user = await business.getEmployee(req.body.username);
+    if (user === false || (typeof user) == "undefined") {
+        console.log("Error: idk");
+        res.json({ error: true });
     } else {
-      res.json({error: true, login: false});
+        bcrypt.compare(req.body.password, user.password, (err, result) => {
+            if (result) {
+                jwt.sign({ employee_id: user.employee_id }, process.env.secretKey, { expiresIn: "2h" }, (err, token) => {
+                    if (err) {
+                        console.log("signing error");
+                        res.json({error: true});
+                    } 
+                    res.json({
+                        error: false,
+                        login: true,
+                        token
+                    });
+                });
+            } else {
+                res.json({error: true, login: false});
+            }
+        });
     }
-=======
-      } else {
-        res.json({error: true});
-      }
-    });
->>>>>>> ee2019f8ab3943c058f6d0bda4e15285e099bf58
-  }
 });
 
 
