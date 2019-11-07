@@ -24,7 +24,7 @@ router.post('/login', async function(req, res) {
         });
       });
     } else {
-      res.json({error: false, login: false});
+      res.json({error: true, login: false});
     }
   }
 });
