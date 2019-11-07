@@ -7,6 +7,10 @@ class CalendarWidget extends React.Component {
 
     this.state = {
       date: new Date(),
+      dates: {
+        one: new Date("2019", 11, 5),
+        two: new Date("2019", 11, 7)
+      }
     }
   }
 
