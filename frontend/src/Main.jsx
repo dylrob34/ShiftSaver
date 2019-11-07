@@ -4,6 +4,7 @@ import './static/css/Main.css';
 import Selector from "./Selector";
 import Navigation from "./Navigation";
 import {userToken} from './Login';
+import {updateLoginState} from './MessageStore';
 
 // The main page, gets shown when the user is logged in.
 // The rest of the app are children of this component
@@ -27,7 +28,11 @@ class Main extends React.Component {
         })
         .then((response) => response.json())
         .then((data) => {
-            this.setState({name:data.name});
+            if (data.loggedIn === false) {
+                updateLoginState(false);
+            } else {
+                this.setState({name:data.name});
+            }
         })
     }
 

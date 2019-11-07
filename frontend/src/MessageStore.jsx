@@ -16,12 +16,12 @@ export function getLoginState() {
     
 }
 export function subscribe(callback) {
-    emitter.addListener('update', callback);
+    emitter.addListener('login', callback);
 }
 export function unsubscribe(callback) {
-    emitter.removeListener('update', callback);
+    emitter.removeListener('login', callback);
 }
 export function updateLoginState(state) {
     loginState = state;
-    emitter.emit('update');
+    emitter.emit('login');
 }
