@@ -15,7 +15,7 @@ export var userToken;
 // If the login is successful, saves the token contained in the response to the userToken variable which is exported for use by
 // any component that communicates with the backend.
 
-export function AlertDialog() {
+export function AlertDialog(props) {
   const [open, setOpen] = React.useState(false);
 
   // const handleClickOpen = () => {
@@ -24,6 +24,7 @@ export function AlertDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    props.call_back();
   };
 
   return (
@@ -44,7 +45,7 @@ export function AlertDialog() {
           {/* <Button onClick={handleClose} color="primary">
             Disagree
           </Button> */}
-          <Button onClick={handleClose} color="primary" href="http://localhost:3000/" autoFocus>
+          <Button onClick={handleClose} color="primary" autoFocus>
             Got it!
           </Button>
         </DialogActions>
@@ -68,7 +69,7 @@ export class Login extends React.Component {
 
     this.login = this.login.bind(this);
     this.authentication = false;
-
+    this.messageOnClick = this.messageOnClick.bind(this);
 
   }
 
@@ -130,10 +131,14 @@ login() {
     this.setState({ password: e.target.value });
   }
 
+  messageOnClick() {
+    this.setState({dialog: false});
+  }
+
   render() {
 
     if (this.state.dialog === true){
-      return <AlertDialog/>
+      return <AlertDialog call_back={this.messageOnClick}/>
     }
 
     // if(this.authentication === false){

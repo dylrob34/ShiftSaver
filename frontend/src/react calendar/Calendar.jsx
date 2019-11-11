@@ -347,7 +347,7 @@ export default class Calendar extends Component {
       }
     } else {
       // Range selection turned off
-      nextValue = this.getProcessedValue(new Date("2019", 10, 15));
+      nextValue = this.getProcessedValue(value);
       callback = () => callIfDefined(onChange, nextValue);
     }
 
@@ -441,6 +441,7 @@ export default class Calendar extends Component {
           showFixedNumberOfWeeks,
           showNeighboringMonth,
           showWeekNumbers,
+          dates
         } = this.props;
         const { onMouseLeave } = this;
 
@@ -454,6 +455,7 @@ export default class Calendar extends Component {
             showFixedNumberOfWeeks={showFixedNumberOfWeeks}
             showNeighboringMonth={showNeighboringMonth}
             showWeekNumbers={showWeekNumbers}
+            dates={dates}
             {...commonProps}
           />
         );

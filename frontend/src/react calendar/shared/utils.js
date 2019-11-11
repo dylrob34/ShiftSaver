@@ -53,11 +53,10 @@ export const between = (value, min, max) => {
 };
 
 export const getTileClasses = ({
-  value, valueType, date, dateType, hover,
+  value, valueType, date, dateType, hover, dates,
 } = {}) => {
   const className = 'react-calendar__tile';
   const classes = [className];
-
   if (!date) {
     return classes;
   }
@@ -68,6 +67,14 @@ export const getTileClasses = ({
 
   const now = new Date();
   const dateRange = date instanceof Array ? date : getRange(dateType, date);
+
+  var i;
+  for (i = 0; i < dates.length; i++) {
+    const range = getRange(valueType, dates[i]);
+    if (isRangeWithinRange(range, dateRange)) {
+      classes.push(`${className}--working`);
+    }
+  }
 
   if (isValueWithinRange(now, dateRange)) {
     classes.push(`${className}--now`);

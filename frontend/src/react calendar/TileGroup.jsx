@@ -19,6 +19,7 @@ export default function TileGroup({
   tile: Tile,
   value,
   valueType,
+  dates,
   ...tileProps
 }) {
   const tiles = [];
@@ -29,7 +30,7 @@ export default function TileGroup({
       <Tile
         key={date.getTime()}
         classes={getTileClasses({
-          value, valueType, date, dateType, hover,
+          value, valueType, date, dateType, hover, dates
         })}
         date={date}
         point={point}
