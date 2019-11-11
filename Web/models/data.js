@@ -89,19 +89,31 @@ function getEmployees() {
     });
   }
 
-  function createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin, pass) {
+  function createEmployee(employee_id, first_name, last_name, middle_inital, job_title, email, manager, admin, phone, pass) {
     return new Promise( (resolve, reject) => {
+        console.log("INSERT INTO employee values ("
+        + "'" + employee_id + "',"
+        + "'" + first_name + "'" + ","
+        + "'" + last_name + "'" + ","
+        + "'" + middle_inital + "'" + ","
+        + "'" + job_title + "'" + ","
+        + "'" + email + "'" + ","
+        + manager + ","
+        + admin + ","
+        + "'" + phone + "'" + ","
+        + "'" + pass + "'"
+        + ")");
         connection.query("INSERT INTO employee values ("
-            + employee_id + ","
+            + "'" + employee_id + "',"
             + "'" + first_name + "'" + ","
             + "'" + last_name + "'" + ","
             + "'" + middle_inital + "'" + ","
             + "'" + job_title + "'" + ","
-            + phone + ","
             + "'" + email + "'" + ","
             + manager + ","
             + admin + ","
-            + pass
+            + "'" + phone + "'" + ","
+            + "'" + pass + "'"
             + ")", (error, result) => {
             if (error) {
                 resolve(false);

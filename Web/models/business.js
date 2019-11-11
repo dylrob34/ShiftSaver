@@ -55,10 +55,10 @@ async function getIsAdmin(id) {
   
 }
 
-async function createEmployee(selfid, employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin,pass) {
+async function createEmployee(selfid, employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin, pass) {
     var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
     if (getIsManager(selfid) || getIsAdmin(selfid) && validEmailRegex.test(email)) {
-        var result = await dataMethods.createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin,pass);
+        var result = await dataMethods.createEmployee(employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin, pass);
 
         return result;
     } else {
