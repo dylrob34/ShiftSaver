@@ -7,15 +7,13 @@ class CalendarWidget extends React.Component {
 
     this.state = {
       date: new Date(),
-      dates: {
-        one: new Date("2019", 11, 5),
-        two: new Date("2019", 11, 7)
-      }
+      dates: [
+        new Date("2019", 10, 5),
+        new Date("2019", 10, 7)]
     }
   }
 
   onChange = date => {
-    console.log("test");
     this.setState({ date })
   }
 
@@ -25,6 +23,7 @@ class CalendarWidget extends React.Component {
         <Calendar
           onChange={this.onChange}
           value={this.state.date}
+          dates={this.state.dates}
         />
       </div>
     );
