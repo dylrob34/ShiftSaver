@@ -17,6 +17,10 @@ Database tables need to be updated to have at least a password
 Week and Day view for the calendar, these are big, this is where shifts should be editable. Gonna wanna meet and discuss how the hell were going to pull this off
 
 Email forms need to be done, I asked anastasia, she never responded -_-
-i think i even used @anastasia
+i think i even used @anastasia :/
 
 someone with some sense of style should make this look good
+
+set username field to max of 4 characters in the login form, mahmood told us about sql injection hacking, justttt to be sure.
+
+create shift form, like the create user one
