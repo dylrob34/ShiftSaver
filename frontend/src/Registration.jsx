@@ -1,5 +1,5 @@
 import React from 'react';
-import './static/css/Registration.css';
+//import './static/css/Registration.css';
 
 export class Registration extends React.Component{
     constructor(props){

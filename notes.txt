@@ -1,4 +1,4 @@
-add "homepage":"./", to package.json in front end to work with electron
+add "homepage":"./", to package.json in front end to package.json to work with electron
 
 ALL buttons in forms need to be type="button", the default type is "submit", at least in chrome, whichsubmits the form and reloads the page which logs the person out, cancelling what they were doing.
 

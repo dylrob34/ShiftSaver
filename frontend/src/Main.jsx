@@ -1,5 +1,4 @@
 import React from 'react';
-import Calendar from './Calendar';
 import './static/css/Main.css';
 import Selector from "./Selector";
 import Navigation from "./Navigation";
@@ -41,14 +40,6 @@ class Main extends React.Component {
           <div className="mainDiv">
             <Navigation name={this.state.name}/>
             <Selector />
-            <Calendar />
-
-            <div className="upcomingShiftsDiv">
-                <h1>Upcoming Shifts</h1>
-                <ul>
-                    <li>list for the next 2? weeks of upcoming shifts</li>
-                </ul>
-            </div>
           </div>
         );
     }

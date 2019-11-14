@@ -25,6 +25,12 @@ class CalendarWidget extends React.Component {
           value={this.state.date}
           dates={this.state.dates}
         />
+        <div className="upcomingShiftsDiv">
+                <h1>Upcoming Shifts</h1>
+                <ul>
+                    <li>list for the next 2? weeks of upcoming shifts</li>
+                </ul>
+            </div>
       </div>
     );
   }

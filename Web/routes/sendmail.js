@@ -17,6 +17,7 @@ router.post('/', verifyToken, async function (req, res) {
         res.json({ error: true });
     } else {
         if (email != "") {
+            console.log(email);
             sendMail(email,
                     req.body.subject,
                     req.body.text);
@@ -29,7 +30,6 @@ router.post('/', verifyToken, async function (req, res) {
 
 // function that actually sends the email
 function sendMail(mailto, subject, text) {
-    console.log(mailto)
 
     var transporter = nodemailer.createTransport({
         service: 'gmail',

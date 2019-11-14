@@ -36,11 +36,7 @@ async function getMobileNumber(id) {
 async function getEmail(id) {
     var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
     var result = await dataMethods.getEmployee(id);
-    if (validEmailRegex.test(result.email)) {
-        return result.email;
-    } else {
-        return "invalid email stored in database please contact an admin";
-    }
+    return result.email;
        
 }
 
