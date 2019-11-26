@@ -36,6 +36,17 @@ router.post('/create', verifyToken, async (req, res) => {
     }
 });
 
+//gets all users from the database
+router.get('/getAllPeople', verifyToken, async (req, res) => {
+    response = await business.getEmployees();
+    res.json(response);
+});
+
+router.get('/getCurrentUser', verifyToken, async (req, res) => {
+    response = await business.getEmployee(authData.employee_id);
+    res.json(response);
+});
+
 
 // route returns the name of the current user as a JSON object of the format {name:"name"}
 // used in front end to greet user on the main page

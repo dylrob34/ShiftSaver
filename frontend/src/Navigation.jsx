@@ -1,5 +1,6 @@
 import React from "react";
 import {updateLoginState} from './MessageStore';
+import './static/css/NavBar.css';
 
 // Navigation bar on the top of the main page. Should always be visible. Takes in a prop with the value of name to be displayed
 // as a greeting to the user
@@ -14,13 +15,11 @@ class Navigation extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className = "container">
                 <h1>Hello {this.props.name}!</h1>
-
-                <button onClick={this.logout}>
-  Logout
-</button>
-                
+                <nav>
+                    <li><button onClick={this.logout}>Logout</button></li>
+                </nav>
             </div>
         );
     }

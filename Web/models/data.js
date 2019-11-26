@@ -35,7 +35,7 @@ function getEmployees() {
             if (error) {
                 return reject(false);
             } else {
-                resolve(result[0]);
+                resolve(result);
             }
         });
     });
