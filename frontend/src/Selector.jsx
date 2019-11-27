@@ -3,7 +3,7 @@ import Calendar from "./Calendar";
 import People from "./People";
 import Profile from "./Profile";
 import {updateLoginState} from './MessageStore';
-import '/Users/ervinlara/Documents/GitHub/ShiftSaver/frontend/src/static/css/Selector.css';
+import './static/css/Selector.css';
 
 
 // Component that controls which page is visible, such as people or calender

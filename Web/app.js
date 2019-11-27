@@ -21,6 +21,7 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth').router;
 var sendMail = require('./routes/sendmail');
 var user = require('./routes/user');
+var shift = require('./routes/shift');
 
 var app = express();
 
@@ -42,6 +43,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/sendmail', sendMail);
 app.use('/user', user);
+app.use('/shift', shift);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

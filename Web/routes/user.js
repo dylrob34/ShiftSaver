@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
 var verifyToken = require('./auth').verifyToken;
-var jwt = require('jsonwebtoken');
 var business = require("../models/business");
 
 
