@@ -45,7 +45,7 @@ render() {
 
     return(
         <div>
-            <JSON className="stringify"></JSON>
+            <p1>idk what this was that was here, so i deleted it lol it was throwing an error</p1>
         </div>
     );
 }

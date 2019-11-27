@@ -1,0 +1,16 @@
+.dayDiv {
+    border: 3px black solid;
+    width: 100%;
+    height: 100%;
+}
+
+.hoursDiv {
+    float: left;
+    width: 5%;
+    max-width: 50px;
+    border: 1px black;
+}
+
+.otherDiv {
+    float: right;
+}

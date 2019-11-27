@@ -16,7 +16,7 @@ export var userToken;
 // any component that communicates with the backend.
 
 export function AlertDialog(props) {
-  const [open, setOpen] = React.useState(false);
+  const [setOpen] = React.useState(false);
 
   // const handleClickOpen = () => {
   //   setOpen(true);

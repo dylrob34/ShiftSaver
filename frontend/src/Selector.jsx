@@ -29,7 +29,7 @@ class Selector extends React.Component {
             content = <Calendar />
         } else if (this.state.page === "people") {
             content = <People />
-        } else if (this.state.page == "profile"){
+        } else if (this.state.page === "profile"){
             content = <Profile />
         }
         return(
