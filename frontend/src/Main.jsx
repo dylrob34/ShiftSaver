@@ -1,7 +1,6 @@
 import React from 'react';
 import './static/css/Main.css';
 import Selector from "./Selector";
-import Navigation from "./Navigation";
 import {userToken} from './Login';
 import {updateLoginState} from './MessageStore';
 
@@ -38,8 +37,7 @@ class Main extends React.Component {
     render() {
         return (
           <div className="mainDiv">
-            <Navigation name={this.state.name}/>
-            <Selector />
+            <Selector name={this.state.name}/>
           </div>
         );
     }

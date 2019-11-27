@@ -2,6 +2,9 @@ import React from 'react';
 import Calendar from "./Calendar";
 import People from "./People";
 import Profile from "./Profile";
+import {updateLoginState} from './MessageStore';
+import '/Users/ervinlara/Documents/GitHub/ShiftSaver/frontend/src/static/css/Selector.css';
+
 
 // Component that controls which page is visible, such as people or calender
 class Selector extends React.Component {
@@ -16,6 +19,10 @@ class Selector extends React.Component {
 
     changePage(page) {
         this.setState({page});
+    }
+
+    logout() {
+        updateLoginState(false);
     }
 
 
@@ -33,14 +40,24 @@ class Selector extends React.Component {
             content = <Profile />
         }
         return(
-            <div className="selectorDiv">
+
+            
+            <div className="container">
+                <header>
+                <h1 className = "logo" >Hello {this.props.name}!</h1>
+                <nav>
                 <ul style={listStyle}>
-                    <li onClick={() => this.changePage("calendar")} >Calendar</li>
-                    <li onClick={() => this.changePage("people")} >People</li>
-                    <li onClick={() => this.changePage("profile")} >Profile</li>
+                    <li><button onClick={() => this.changePage("calendar")} >Calendar</button></li>
+                    <li> <button onClick={() => this.changePage("people")} >People</button></li>
+                    <li><button onClick={() => this.changePage("profile")}>Profile</button></li>
+                    <li><button onClick={this.logout}>Logout</button></li>
                 </ul>
-                <div>
+                </nav>
+                </header>
+                <div className = "display">
+                    <div className = "displayItem">
                     {content}
+                    </div>
                 </div>
             </div>
         );
