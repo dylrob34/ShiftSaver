@@ -148,14 +148,16 @@ login() {
 
     return (
 
+      <html>
 
       <div className="loginDiv">
         
-        <h1 id="welcomeText">Welcome!</h1>
+        <p id="welcomeText" align="center">Welcome!</p>
         <form className="loginForm">
 
           <div className="usernameDiv">
             <input
+            className = "un"
             type="text"
             id="username"
             placeholder="Enter Username"
@@ -164,6 +166,7 @@ login() {
           </div>
           <div className="passwordDiv">
             <input
+            className = "pass"
             type="password"
             id="password"
             placeholder="Enter Password"
@@ -177,7 +180,7 @@ login() {
         </form>
       </div>
 
-
+      </html>
     
     );
   }
