@@ -41,9 +41,9 @@ function getEmployees() {
     });
 }
 
-  function getShiftRecordById(shift) {
+  function getShiftRecordById(id) {
     return new Promise( (resolve, reject) => {
-        connection.query("SELECT * FROM shift_record WHERE shift_id='" + shift + "'", (error, result) => {
+        connection.query("SELECT * FROM shift_record WHERE shift_id='" + id + "'", (error, result) => {
             if (error) {
                 return reject(false);
             } else {
@@ -51,7 +51,18 @@ function getEmployees() {
             }
         });
     });  
-  }
+}
+function getShiftRecordByEmployee(Employee_id) {
+    return new Promise((resolve, reject) => {
+        connection.query("SELECT * FROM shift_record WHERE shift_date='" + Employee_id + "'", (error, result) => {
+            if (error) {
+                return reject(false);
+            } else {
+                resolve(result[0]);
+            }
+        });
+    });
+}
 
   function getShiftRecordByDate(shift_Date) {
     return new Promise( (resolve, reject) => {
@@ -87,7 +98,42 @@ function getEmployees() {
             }
         });
     });
-  }
+}
+
+function createWholeEmployee(user) {
+    return new Promise((resolve, reject) => {
+        console.log("INSERT INTO employee values ("
+            + "'" + user.employee_id + "',"
+            + "'" + user.first_name + "'" + ","
+            + "'" + user.last_name + "'" + ","
+            + "'" + user.middle_inital + "'" + ","
+            + "'" + user.job_title + "'" + ","
+            + "'" + user.email + "'" + ","
+            + user.manager + ","
+            + user.admin + ","
+            + "'" + user.phone + "'" + ","
+            + "'" + user.pass + "'"
+            + ")");
+        connection.query("INSERT INTO employee values ("
+            + "'" + user.employee_id + "',"
+            + "'" + user.first_name + "'" + ","
+            + "'" + user.last_name + "'" + ","
+            + "'" + user.middle_inital + "'" + ","
+            + "'" + user.job_title + "'" + ","
+            + "'" + user.email + "'" + ","
+            + user.manager + ","
+            + user.admin + ","
+            + "'" + user.phone + "'" + ","
+            + "'" + user.pass + "'"
+            + ")", (error, result) => {
+                if (error) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+    });
+}
 
   function createEmployee(employee_id, first_name, last_name, middle_inital, job_title, email, manager, admin, phone, pass) {
     return new Promise( (resolve, reject) => {
@@ -131,5 +177,7 @@ function getEmployees() {
       getShiftRecordById,
       getShiftRecordByDate,
       getShifts,
-      createEmployee
+      createEmployee,
+      createWholeEmployee,
+      getShiftRecordById
   };
