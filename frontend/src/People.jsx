@@ -21,12 +21,14 @@ class People extends React.Component {
 
         this.changePerson = this.changePerson.bind(this);
         this.selectPerson = this.selectPerson.bind(this);
+        this.email = this.email.bind(this);
+        this.assignShift = this.assignShift.bind(this);
 
 
     }
 
-    changePerson(person) {
-        this.setState({ current : person});
+    changePerson(n) {
+        this.setState({ current: this.state.allPeople[n]});//assigns n-th employee to state current
         this.selectPerson();
     }
 
@@ -53,14 +55,13 @@ class People extends React.Component {
     }
 
     email() {
-        //alert(this.state.current)
-        //var JSONobj = JSON.parse(this.state.current);
-        //alert(JSONobj.first_name);
-        
+       // apply Lucas's function using "this.state.current.email" as an email to be sent to 
+        alert(this.state.current.email); 
     }
 
     assignShift() {
-        
+        //use this.state.current.employee_id to assign shifts
+        alert(this.state.current.employee_id);        
     }
 
 
@@ -72,9 +73,8 @@ class People extends React.Component {
             for (var i = 0; i < this.state.allPeople.length; i++) {
                 var text = this.state.allPeople[i].first_name + " " + this.state.allPeople[i].last_name +
                     "\n" + this.state.allPeople[i].phone_number
-               // list.push(<li key={i}><button onClick={() => this.changePerson(JSON.stringify(this.state.allPeople[document.getElementsByTagName('ul').closest('li').attr("key")]))}>{text}</button></li >)
-                list.push(<li key={i}><button onClick={this.selectPerson}>{text}</button></li >)
-            }
+                list.push(<li key={i}><button value={i} onClick={e => this.changePerson(e.target.value)}>{text}</button></li >)
+             }
         }
 
         return (
@@ -85,7 +85,7 @@ class People extends React.Component {
                 </ul>
                 
                 <div className={this.state.isSelected ? "show" : "invisible"} >
-                    <p>Contact or assign shifts to selected employee:</p>
+                    <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
                     <button onClick={this.email}>Email</button>
                     <button onClick={this.assignShift}>Assign Shifts</button>                    
                     </div>
