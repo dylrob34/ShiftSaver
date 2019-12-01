@@ -2,15 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\frontend",
-    "\\frontend\\src",
     "\\frontend\\src\\static",
     "\\frontend\\src\\static\\css",
     "\\Web",
-    "\\Web\\database",
-    "\\Web\\public",
-    "\\Web\\public\\javascripts",
-    "\\Web\\routes"
+    "\\Web\\database"
   ],
-  "SelectedNode": "\\swe.sql",
+  "SelectedNode": "\\frontend",
   "PreviewInSolutionExplorer": false
 }
