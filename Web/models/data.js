@@ -54,13 +54,15 @@ function getEmployees() {
 }
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM shift_record WHERE shift_date='" + Employee_id + "'", (error, result) => {
-            if (error) {
-                return reject(false);
-            } else {
-                resolve(result[0]);
-            }
-        });
+        connection.query("SELECT * FROM shift_record WHERE employee_id='" + Employee_id + "' AND BETWEEN  '"
+            + "CONVERT(VARCHAR(10), getdate(), 111)" + ' AND '
+            + "DATEADD(week, 2, getdate())" + "'", (error, result) => {
+                if (error) {
+                    return reject(false);
+                } else {
+                    resolve(result[0]);
+                }
+            });
     });
 }
 
@@ -174,6 +176,7 @@ function createWholeEmployee(user) {
       getAddress,
       getEmployee,
       getEmployees,
+      getShiftRecordByEmployee,
       getShiftRecordById,
       getShiftRecordByDate,
       getShifts,

@@ -50,6 +50,14 @@ async function getIsAdmin(id) {
     return(result.is_admin == 1);
   
 }
+async function getShiftsByEmployee(selfid, id) {
+    if (selfid == id || getIsManager(selfid) || getIsAdmin(selfid)) {
+        var result = await dataMethods.getShiftRecordByEmployee(id);
+        return result;
+    } else {
+        return {  error:  'Cannont access shifts'  };
+    }
+}
 
 async function createEmployee(selfid, employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin, pass) {
     var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
@@ -73,5 +81,6 @@ module.exports = {
     getEmail,
     getIsManager,
     getIsAdmin,
-    createEmployee
+    createEmployee,
+    getShiftsByEmployee
 }

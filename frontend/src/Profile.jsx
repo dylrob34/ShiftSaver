@@ -30,7 +30,7 @@ componentDidMount() {
         if (data.loggedIn === false) {
             updateLoginState(false);
         } else {
-            this.setState({allPeople:data});
+            this.setState({currentUser:data});
         }
     })
 }
@@ -41,11 +41,12 @@ getInfo(){
 
 render() {
 
+    var jsonUser = this.state.currentUser;
    
 
     return(
         <div>
-            <p1>idk what this was that was here, so i deleted it lol it was throwing an error</p1>
+            <p1>{jsonUser}</p1>
         </div>
     );
 }

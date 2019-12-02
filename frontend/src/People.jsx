@@ -2,6 +2,7 @@ import React from 'react';
 import './static/css/People.css';
 import { userToken } from './Login';
 import { updateLoginState } from './MessageStore';
+import Email from "./Email";
 
 
 
@@ -16,13 +17,15 @@ class People extends React.Component {
         this.state = {
             current: "",
             allPeople: "",
-            isSelected: false
+            isSelected: false,
+            email: null
         };
 
         this.changePerson = this.changePerson.bind(this);
         this.selectPerson = this.selectPerson.bind(this);
         this.email = this.email.bind(this);
         this.assignShift = this.assignShift.bind(this);
+        this.discard = this.discard.bind(this);
 
 
     }
@@ -54,9 +57,14 @@ class People extends React.Component {
         this.setState({ isSelected: true });
     }
 
+    discard() {
+        this.setState({email: null});
+    }
+
     email() {
        // apply Lucas's function using "this.state.current.email" as an email to be sent to 
-        alert(this.state.current.email); 
+       this.setState({email: this.state.current.email});
+        //alert(this.state.current.email); 
     }
 
     assignShift() {
@@ -77,6 +85,12 @@ class People extends React.Component {
              }
         }
 
+        var email;
+        
+        if (this.state.email != null) {
+            email = <Email discard={this.discard} to={this.state.email} />;
+        }
+
         return (
                 <div>
                 <h1>People!</h1>
@@ -86,6 +100,7 @@ class People extends React.Component {
                 
                 <div className={this.state.isSelected ? "show" : "invisible"} >
                     <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
+                    <Email discard={this.discard} to={this.state.email} />
                     <button onClick={this.email}>Email</button>
                     <button onClick={this.assignShift}>Assign Shifts</button>                    
                     </div>
