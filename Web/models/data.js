@@ -54,9 +54,7 @@ function getEmployees() {
 }
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
-        connection.query("SELECT * FROM shift_record WHERE employee_id='" + Employee_id + "' AND BETWEEN  '"
-            + "CONVERT(VARCHAR(10), getdate(), 111)" + ' AND '
-            + "DATEADD(week, 2, getdate())" + "'", (error, result) => {
+        connection.query("select shift_date,start_time,end_time FROM shift as s ,shift_record as sr WHERE s.shift_id = sr.shift_id AND sr.employee_id =" + Employee_id + "AND s.shift_date BETWEEN NOW() AND(NOW() + INTERVAL 14 DAY)", (error, result) => {
                 if (error) {
                     return reject(false);
                 } else {

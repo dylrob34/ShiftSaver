@@ -75,6 +75,10 @@ class People extends React.Component {
         alert(this.state.current.employee_id);        
     }
 
+    infoSection() {
+        this.setState({addPerson: true});
+    }
+
 
     render() {
 
@@ -93,7 +97,7 @@ class People extends React.Component {
         if(!this.state.addPerson) {
             info = 
             <div>
-                <h1>{this.state.current.first_name} {this.staste.current.last_name}</h1>
+                <h1>{this.state.current.first_name} {this.state.current.last_name}</h1>
                 <br/>
                 <h3>Phone Number: {this.state.current.phone_number}</h3>
                 <h3>Email: {this.state.current.email}</h3>
