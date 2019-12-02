@@ -19,6 +19,7 @@ class People extends React.Component {
             current: "",
             allPeople: "",
             isSelected: false,
+            addPerson: false,
             email: null
         };
 
