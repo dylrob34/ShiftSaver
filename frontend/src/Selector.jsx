@@ -66,5 +66,5 @@ class Selector extends React.Component {
 
 }
 
-
+//git add/rm <file>
 export default Selector;

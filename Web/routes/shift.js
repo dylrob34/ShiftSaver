@@ -6,7 +6,8 @@ var business = require('../models/business');
 //this grabs the next two weeks of shifts for you
 router.get('/upcomingShifts', verifyToken, async (req, res) => {
     var user = req.authData.employee_id;
-    res.render("NOT YET IMPLEMENTED, FUCK OFF");
+    const shifts = await business.getShiftsByEmployee(user, user);
+    console.log("shifts", shifts);
 })
 
 module.exports = router;

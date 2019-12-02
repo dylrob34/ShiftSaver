@@ -148,10 +148,11 @@ login() {
 
     return (
 
-      <html>
 
       <div className="loginDiv">
         
+
+      
         <p id="welcomeText" align="center">Welcome!</p>
         <form className="loginForm">
 
@@ -180,7 +181,6 @@ login() {
         </form>
       </div>
 
-      </html>
     
     );
   }
