@@ -2,6 +2,7 @@ import React from 'react';
 import './static/css/People.css';
 import { userToken } from './Login';
 import { updateLoginState } from './MessageStore';
+import Registration from './Registration.jsx'
 
 
 
@@ -16,19 +17,22 @@ class People extends React.Component {
         this.state = {
             current: "",
             allPeople: "",
-            isSelected: false
+            isSelected: false,
+            addPerson: false,
         };
 
         this.changePerson = this.changePerson.bind(this);
         this.selectPerson = this.selectPerson.bind(this);
         this.email = this.email.bind(this);
         this.assignShift = this.assignShift.bind(this);
+        this.infoSection = this.infoSection.bind(this);
 
 
     }
 
     changePerson(n) {
         this.setState({ current: this.state.allPeople[n]});//assigns n-th employee to state current
+        this.setState({addPerson: false});
         this.selectPerson();
     }
 
@@ -64,6 +68,10 @@ class People extends React.Component {
         alert(this.state.current.employee_id);        
     }
 
+    infoSection(){
+        this.setState({addPerson: true})
+    }
+
 
     render() {
 
@@ -77,9 +85,26 @@ class People extends React.Component {
              }
         }
 
+        var info;
+
+        if(!this.state.addPerson){
+            info = 
+                <div>    
+                <h1>{this.state.current.first_name} {this.state.current.last_name}</h1>
+                <br/>
+                <h3>Phone Number: {this.state.current.phone_number}</h3>
+                <h3>Email: {this.state.current.email}</h3>
+                <h3>Employee ID: {this.state.current.employee_id}</h3>
+                </div>
+                
+        }else{
+            info = <Registration />
+        }
+
         return (
                 <div>
-                <h1>People!</h1>
+                <h1>People!</h1> 
+                <button onClick= {this.infoSection}>Add Employee</button>
                 <ul>
                     {list}
                 </ul>
@@ -87,8 +112,10 @@ class People extends React.Component {
                 <div className={this.state.isSelected ? "show" : "invisible"} >
                     <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
                     <button onClick={this.email}>Email</button>
-                    <button onClick={this.assignShift}>Assign Shifts</button>                    
+                    <button onClick={this.assignShift}>Assign Shifts</button>  
+                    {info}                  
                     </div>
+
                 </div>
         );
     }
