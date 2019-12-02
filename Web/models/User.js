@@ -38,6 +38,4 @@ function getUser() {
     return user;
 }
 
-module.exports{
-    User
-}
+module.export.User;

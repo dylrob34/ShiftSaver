@@ -25,9 +25,22 @@ class ShiftSaver extends React.Component {
   }
 
   render() {
-    var toView = !this.state.loggedIn ? <Login onLoggedIn={this.onLogin}/>:<Main />;
+    var toView;
 
+    if(!this.state.loggedIn){
+      toView = 
+      <div>
+        <h1>ShiftSaver!</h1>
+        <Login onLoggedIn={this.onLogin}/>
+      </div>
+    }else{
+      toView = <Main />;
+    }
+
+  
     return (
+
+      
       <div>
         {toView}
       </div>

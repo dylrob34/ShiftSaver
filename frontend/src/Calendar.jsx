@@ -24,7 +24,6 @@ class CalendarWidget extends React.Component {
   }
 
   componentDidMount() {
-    console.log("calendar did mount");
     fetch("http://localhost/shift/upcomingShifts", {
             headers: {
                 Accept: 'application/json',
@@ -37,8 +36,11 @@ class CalendarWidget extends React.Component {
                 if (data.loggedIn === false) {
                     updateLoginState(false);
                 } else {
-                    this.setState({ upcoming: data });
+                    this.setState({ upcoming: data.shifts });
                 }
+            })
+            .catch((err) => {
+              console.log("error:", err);
             })
   }
 
@@ -65,11 +67,12 @@ class CalendarWidget extends React.Component {
     var upcoming = [];
     if (this.state.upcoming != null) {
       for (var i = 0; i < this.state.upcoming.length; i++) {
-        var text = this.state.upcoming[i];
+        console.log("THE SHIFTS", this.state.upcoming[i]);
+        var text = this.state.upcoming[i].shift_date + ", " + this.state.upcoming[i].start_time + "-" + this.state.upcoming[i].end_time;
         upcoming.push(<li key={i}>{text}</li>);
       }
     } else {
-      upcoming = <p>errrrrrrr</p>;
+      upcoming = <li><p>No upcoming shifts</p></li>;
     }
 
     return (
@@ -78,7 +81,7 @@ class CalendarWidget extends React.Component {
         <div className="upcomingShiftsDiv">
                 <h1>Upcoming Shifts</h1>
                 <ul>
-                    <li>{upcoming}</li>
+                    {upcoming}
                 </ul>
             </div>
       </div>

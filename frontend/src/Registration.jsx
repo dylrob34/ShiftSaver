@@ -1,5 +1,7 @@
 import React from 'react';
-//import './static/css/Registration.css';
+import './static/css/Registration.css';
+import { userToken } from "./Login";
+import { updateLoginState } from "./MessageStore";
 
 export class Registration extends React.Component{
     constructor(props){
@@ -8,7 +10,7 @@ export class Registration extends React.Component{
             employeeID: "",
             firstName: "",
             lastName: "",
-            middleInitila: "",
+            middleInitial: "",
             job: "",
             phone: "",
             email: "",
@@ -22,13 +24,14 @@ export class Registration extends React.Component{
         this.onJobTitle = this.onJobTitle.bind(this)
         this.onPhoneNumber = this.onPhoneNumber.bind(this)
         this.onEmail = this.onEmail.bind(this)
-        this.onEmplyeeID = this.onEmplyeeID.bind(this)
+        this.onEmployeeID = this.onEmployeeID.bind(this)
         this.onPassword = this.onPassword.bind(this)
+        this.createAccount = this.createAccount.bind(this);
     }
 
-    onEmplyeeID(e){
+    onEmployeeID(e){
       e.preventDefault();
-      this.setState({ userName: e.target.value });
+      this.setState({ employeeID: e.target.value });
     }
 
     onSelectingAccType(e){
@@ -56,7 +59,7 @@ export class Registration extends React.Component{
 
     onMiddleInitial(e){
       e.preventDefault();
-      this.setState({ middleInitila: e.target.value });
+      this.setState({ middleInitial: e.target.value });
     }
     onJobTitle(e){
       e.preventDefault();
@@ -70,7 +73,7 @@ export class Registration extends React.Component{
 
     onEmail(e){
       e.preventDefault();
-      this.setState({ emai: e.target.value });
+      this.setState({ email: e.target.value });
     }
 
     onPassword(e){
@@ -79,26 +82,35 @@ export class Registration extends React.Component{
     }
 
     createAccount(){
-
-      return fetch("http://localhost/user/create", {
+      fetch("http://localhost/user/create", {
         method:"POST",
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          authorization: "Bearer " + userToken
         },
         body: JSON.stringify({
-            employeeID: this.employeeID,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            middleInitila: this.middleInitila,
-            job: this.job,
-            phone: this.phone,
-            email: this.email,
-            password: this.password,
-            accountType: this.accountType,
+            employee_id: this.state.employeeID,
+            first_name: this.state.firstName,
+            last_name: this.state.lastName,
+            middle_initial: this.state.middleInitial,
+            job_title: this.state.job,
+            phone: this.state.phone,
+            email: this.state.email,
+            password: this.state.password,
+            manager: this.state.accountType,
+            admin: 0,
         })
       })
       .then((response) => response.json())
+      .then((data) => {
+        console.log("data", data);
+        if (data.loggedIn === false) {
+          updateLoginState(false);
+      } else {
+        console.log("created new user:", data);
+      }
+      })
       .catch((err) => {
         console.log("Error: unable to connect to server");
       })
@@ -129,7 +141,7 @@ export class Registration extends React.Component{
               type="text"
               id="userEmployeeID"
               placeholder="Enter Employee ID"
-              onChange = {this.onEmplyeeID}
+              onChange = {this.onEmployeeID}
               />
 
               <p>First Name</p>
@@ -190,7 +202,9 @@ export class Registration extends React.Component{
 
               <br />
               <br />
-              <button className= "regiBtn" onClick = {this.createAccount}>Create Account !</button>
+
+
+              <button type= "button" onClick = {this.createAccount}>Create Account !</button>
 
 
             </form>

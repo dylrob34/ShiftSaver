@@ -10,7 +10,9 @@ var business = require("../models/business");
 router.post('/create', verifyToken, async (req, res) => {
     var user = await business.getEmployee(req.authData.employee_id);
     if (user.is_manager == 1) {
+        console.log(req.body);
         var hashedPassword = bcrypt.hashSync(req.body.password, 10);
+        console.log(hashedPassword);
         response = await business.createEmployee(
             req.authData.employee_id,
             req.body.employee_id,
@@ -24,7 +26,7 @@ router.post('/create', verifyToken, async (req, res) => {
             req.body.phone,
             hashedPassword
         );
-        console.log("resposne is", response);
+        console.log("response is", response);
         if (response) {
             res.json({ success: true, error: false });
         } else {
