@@ -28,6 +28,7 @@ class People extends React.Component {
         this.email = this.email.bind(this);
         this.assignShift = this.assignShift.bind(this);
         this.discard = this.discard.bind(this);
+        this.infoSection = this.infoSection.bind(this);
 
 
     }
@@ -87,6 +88,19 @@ class People extends React.Component {
              }
         }
 
+        var info;
+
+        if(!this.state.addPerson) {
+            info = 
+            <div>
+                <h1>{this.state.current.first_name} {this.staste.current.last_name}</h1>
+                <br/>
+                <h3>Phone Number: {this.state.current.phone_number}</h3>
+                <h3>Email: {this.state.current.email}</h3>
+                <h3>Employee ID: {this.state.current.employee_id}</h3>
+            </div>
+        }
+
         var email;
         
         if (this.state.email != null) {
@@ -104,7 +118,8 @@ class People extends React.Component {
                     <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
                     <Email discard={this.discard} to={this.state.email} />
                     <button onClick={this.email}>Email</button>
-                    <button onClick={this.assignShift}>Assign Shifts</button>                    
+                    <button onClick={this.assignShift}>Assign Shifts</button>  
+                    {info}                  
                     </div>
                 </div>
         );
