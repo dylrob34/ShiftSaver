@@ -2,7 +2,8 @@ import React from 'react';
 import './static/css/People.css';
 import { userToken } from './Login';
 import { updateLoginState } from './MessageStore';
-import Registration from './Registration.jsx'
+import Registration from './Registration.jsx';
+
 
 
 
@@ -19,12 +20,14 @@ class People extends React.Component {
             allPeople: "",
             isSelected: false,
             addPerson: false,
+            email: null
         };
 
         this.changePerson = this.changePerson.bind(this);
         this.selectPerson = this.selectPerson.bind(this);
         this.email = this.email.bind(this);
         this.assignShift = this.assignShift.bind(this);
+        this.discard = this.discard.bind(this);
         this.infoSection = this.infoSection.bind(this);
 
 
