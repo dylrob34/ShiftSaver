@@ -2,8 +2,8 @@ import React from 'react';
 import './static/css/People.css';
 import { userToken } from './Login';
 import { updateLoginState } from './MessageStore';
-import Registration from './Registration.jsx';
-
+import Registration from "./Registration";
+import Email from "./Email";
 
 
 
@@ -35,7 +35,6 @@ class People extends React.Component {
 
     changePerson(n) {
         this.setState({ current: this.state.allPeople[n]});//assigns n-th employee to state current
-        this.setState({addPerson: false});
         this.selectPerson();
     }
 
@@ -61,18 +60,19 @@ class People extends React.Component {
         this.setState({ isSelected: true });
     }
 
+    discard() {
+        this.setState({email: null});
+    }
+
     email() {
        // apply Lucas's function using "this.state.current.email" as an email to be sent to 
-        alert(this.state.current.email); 
+       this.setState({email: this.state.current.email});
+        //alert(this.state.current.email); 
     }
 
     assignShift() {
         //use this.state.current.employee_id to assign shifts
         alert(this.state.current.employee_id);        
-    }
-
-    infoSection(){
-        this.setState({addPerson: true})
     }
 
 
@@ -90,35 +90,39 @@ class People extends React.Component {
 
         var info;
 
-        if(!this.state.addPerson){
+        if(!this.state.addPerson) {
             info = 
-                <div>    
-                <h1>{this.state.current.first_name} {this.state.current.last_name}</h1>
+            <div>
+                <h1>{this.state.current.first_name} {this.staste.current.last_name}</h1>
                 <br/>
                 <h3>Phone Number: {this.state.current.phone_number}</h3>
                 <h3>Email: {this.state.current.email}</h3>
                 <h3>Employee ID: {this.state.current.employee_id}</h3>
-                </div>
-                
+            </div>
         }else{
             info = <Registration />
         }
 
+        var email;
+        
+        if (this.state.email != null) {
+            email = <Email discard={this.discard} to={this.state.email} />;
+        }
+
         return (
                 <div>
-                <h1>People!</h1> 
-                <button onClick= {this.infoSection}>Add Employee</button>
+                <h1>People!</h1>
                 <ul>
                     {list}
                 </ul>
                 
                 <div className={this.state.isSelected ? "show" : "invisible"} >
                     <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
+                    <Email discard={this.discard} to={this.state.email} />
                     <button onClick={this.email}>Email</button>
                     <button onClick={this.assignShift}>Assign Shifts</button>  
                     {info}                  
                     </div>
-
                 </div>
         );
     }
