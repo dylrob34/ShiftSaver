@@ -2,7 +2,7 @@ import React from 'react';
 import './static/css/People.css';
 import { userToken } from './Login';
 import { updateLoginState } from './MessageStore';
-
+import Registration from "./Registration";
 import Email from "./Email";
 
 
@@ -99,6 +99,8 @@ class People extends React.Component {
                 <h3>Email: {this.state.current.email}</h3>
                 <h3>Employee ID: {this.state.current.employee_id}</h3>
             </div>
+        }else{
+            info = <Registration />
         }
 
         var email;
