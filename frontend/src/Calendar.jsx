@@ -3,6 +3,7 @@ import "./static/css/Calendar.css";
 import React from 'react';
 import Calendar from './react calendar/Calendar';
 import Day from './Day.jsx';
+import CreateShift from "./CreateShift";
 import { updateLoginState } from './MessageStore';
 import { userToken } from './Login';
 
@@ -18,6 +19,7 @@ class CalendarWidget extends React.Component {
     }
 
     this.back = this.back.bind(this);
+    this.createShift = this.createShift.bind(this);
 
 
     fetch("http://localhost/shift/upcomingShifts", {
@@ -71,23 +73,31 @@ class CalendarWidget extends React.Component {
   }
 
   onChange = date => {
-    this.setState({ view: "day" })
+    this.setState({ view: "day" });
   }
 
   back() {
     this.setState({ view: "calendar" });
   }
 
+  createShift() {
+    this.setState({view: "create"});
+  }
+
   render() {
     var view;
-    if (this.state.view === "calendar") {
-      view = <Calendar
+    if (this.state.view === "create") {
+      view = <CreateShift cancel={this.back} />
+    } else if (this.state.view === "day") {
+      view = <Day back={this.back} />
+    } else {
+      view = [];
+      view.push(<Calendar
         onChange={this.onChange}
         value={this.state.date}
         dates={this.state.dates}
-      />
-    } else {
-      view = <Day back={this.back} />
+      />);
+      view.push(<button onClick={this.createShift}>Create Shift</button>);
     }
 
     var upcoming = [];

@@ -52,6 +52,36 @@ function getEmployees() {
         });
     });  
 }
+
+// create a shift-record by assigning it to an employee
+// function createShiftRecord(shift_id){
+
+// }
+
+
+// function createShift(shift_id,shift_date, start_time, end_time){
+
+//     return new Promise((resolve, reject) => {
+//         connection.query(("INSERT INTO shift values ("
+//         + "'" + shift_id + "'" + ","
+//         + "'" + shift_date + "'" + ","
+//         + "'" + start_time + "'" + ","
+//         + "'" + end_time + "'"
+//         + ")",(error, result) => {
+//             if (error) {
+//                     console.log("error inserting a shift");
+//                     return reject(false);
+//                 } else {
+//                     resolve(result);
+//                 }
+//             }
+            
+        
+//             ));
+//     });
+
+// } 
+
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
         connection.query("select dayname(shift_date) as day, dayofmonth(shift_date) as mydate, hour(start_time) as start, hour(end_time) as end from shift as s, shift_record as sr where sr.employee_id=" + Employee_id + " and sr.shift_id=s.shift_id and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)"+"order by day ASC", (error, result) => {

@@ -104,11 +104,8 @@ export class Registration extends React.Component{
       })
       .then((response) => response.json())
       .then((data) => {
-        console.log("data", data);
         if (data.loggedIn === false) {
           updateLoginState(false);
-      } else {
-        console.log("created new user:", data);
       }
       })
       .catch((err) => {
