@@ -7,11 +7,16 @@ var business = require('../models/business');
 router.get('/upcomingShifts', verifyToken, async (req, res) => {
     var user = req.authData.employee_id;
     var shifts = await business.getShiftsByEmployee(user, user);
-    console.log("shifts", shifts);
     if (shifts == undefined) {
         shifts = null;
     }
     res.json({shifts});
+})
+
+router.post("/monthlyShifts", verifyToken, async (req, res) => {
+    var user = req.authData.employee_id;
+    var shifts = await business.getShiftsByEmployeeMonth(user, req.body.month+1);
+    res.json({shifts})
 })
 
 module.exports = router;

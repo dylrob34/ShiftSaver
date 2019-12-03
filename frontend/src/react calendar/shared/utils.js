@@ -68,11 +68,13 @@ export const getTileClasses = ({
   const now = new Date();
   const dateRange = date instanceof Array ? date : getRange(dateType, date);
 
-  var i;
-  for (i = 0; i < dates.length; i++) {
-    const range = getRange(valueType, dates[i]);
-    if (isRangeWithinRange(range, dateRange)) {
-      classes.push(`${className}--working`);
+  if (dates != null) {
+    var i;
+    for (i = 0; i < dates.length; i++) {
+      const range = getRange(valueType, dates[i]);
+      if (isRangeWithinRange(range, dateRange)) {
+        classes.push(`${className}--working`);
+      }
     }
   }
 

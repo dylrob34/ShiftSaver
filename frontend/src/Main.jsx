@@ -12,11 +12,6 @@ class Main extends React.Component {
         this.state = {
             name:""
         };
-    }
-    
-    // "componentDidMount()" gets run when a component is loaded onto the screen, this method gets the name of the current user
-    // from the backend and displays a greeting.
-    componentDidMount() {
         fetch("http://localhost/user/getMyName", {
             headers: {
                 Accept: 'application/json',

@@ -55,8 +55,12 @@ async function getShiftsByEmployee(selfid, id) {
         var result = await dataMethods.getShiftRecordByEmployee(id);
         return result;
     } else {
-        return {  error:  'Cannont access shifts'  };
+        return {  error:  'Cannot access shifts'  };
     }
+}
+async function getShiftsByEmployeeMonth(id, month) {
+    var result = await dataMethods.getShiftRecordByEmployeeMonth(id, month);
+    return result;
 }
 
 async function createEmployee(selfid, employee_id, first_name, last_name, middle_inital, job_title, phone, email, manager, admin, pass) {
@@ -82,5 +86,6 @@ module.exports = {
     getIsManager,
     getIsAdmin,
     createEmployee,
-    getShiftsByEmployee
+    getShiftsByEmployee,
+    getShiftsByEmployeeMonth
 }

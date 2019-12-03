@@ -30,15 +30,7 @@ class People extends React.Component {
         this.discard = this.discard.bind(this);
         this.infoSection = this.infoSection.bind(this);
 
-
-    }
-
-    changePerson(n) {
-        this.setState({ current: this.state.allPeople[n] });//assigns n-th employee to state current
-        this.selectPerson();
-    }
-
-    componentDidMount() {
+        
         fetch("http://localhost/user/getAllPeople", {
             headers: {
                 Accept: 'application/json',
@@ -55,6 +47,11 @@ class People extends React.Component {
                     this.setState({ current: this.state.allPeople[0]});
                 }
             })
+    }
+
+    changePerson(n) {
+        this.setState({ current: this.state.allPeople[n] });//assigns n-th employee to state current
+        this.selectPerson();
     }
 
     selectPerson() {

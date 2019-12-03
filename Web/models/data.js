@@ -54,16 +54,29 @@ function getEmployees() {
 }
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
-        connection.query("select shift_date,start_time,end_time FROM shift as s ,shift_record as sr WHERE s.shift_id = sr.shift_id AND sr.employee_id =" + Employee_id + " AND s.shift_date BETWEEN NOW() AND(NOW() + INTERVAL 14 DAY)", (error, result) => {
+        connection.query("select dayname(shift_date) as day, hour(start_time) as start, hour(end_time) as end from shift as s, shift_record as sr where sr.employee_id=" + Employee_id + " and sr.shift_id=s.shift_id and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)", (error, result) => {
             if (error) {
                     console.log("something broke");
                     return reject(false);
                 } else {
-                    resolve(result[0]);
+                    resolve(result);
+                }
+            });
+    });
+}//select shift_date,start_time,end_time FROM shift as s ,shift_record as sr WHERE s.shift_id = sr.shift_id AND sr.employee_id =" + Employee_id + " AND s.shift_date BETWEEN NOW() AND(NOW() + INTERVAL 14 DAY)
+function getShiftRecordByEmployeeMonth(Employee_id, month) {
+    return new Promise((resolve, reject) => {
+        connection.query("select shift_date from shift as s, shift_record as sr where sr.employee_id=" + Employee_id + " and s.shift_id=sr.shift_id and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)", (error, result) => {
+            if (error) {
+                    console.log("something broke");
+                    return reject(false);
+                } else {
+                    resolve(result);
                 }
             });
     });
 }
+
 
   function getShiftRecordByDate(shift_Date) {
     return new Promise( (resolve, reject) => {
@@ -181,5 +194,6 @@ function createWholeEmployee(user) {
       getShifts,
       createEmployee,
       createWholeEmployee,
-      getShiftRecordById
+      getShiftRecordById,
+      getShiftRecordByEmployeeMonth
   };

@@ -12,10 +12,20 @@ class Day extends React.Component {
     }
 
     render() {
+        var hours = [];
+        var date = new Date();
+        date.setHours(7);
+        for(var i = 0; i < 17; i++) {
+            hours.push(<li key={i}>{date.getHours()}</li>)
+            date.setHours(date.getHours() + 1);
+        }
+
         return (
             <div className="dayDiv" >
                 <div className="hoursDiv">
-                    <p>this is where the hours will go</p>
+                    <ul style={{"listStyleType": "none"}}>
+                        {hours}
+                    </ul>
                 </div>
                 <div className="otherDiv">
                     <h3 onClick={this.props.back}>Month</h3>
