@@ -92,8 +92,8 @@ class CalendarWidget extends React.Component {
 
     var upcoming = [];
     if (this.state.upcoming != null) {
-      for (var i = 0; i < this.state.upcoming.length; i++) {
-        var text = this.state.upcoming[i].day + ", " + this.state.upcoming[i].start + "-" + this.state.upcoming[i].end;
+        for (var i = 0; i < this.state.upcoming.length; i++) {
+            var text = this.state.upcoming[i].day + " the " + this.state.upcoming[i].mydate + ", " + this.state.upcoming[i].start + "-" + this.state.upcoming[i].end;
         upcoming.push(<li key={i}>{text}</li>);
       }
     } else {
