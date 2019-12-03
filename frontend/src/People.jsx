@@ -51,7 +51,8 @@ class People extends React.Component {
                 if (data.loggedIn === false) {
                     updateLoginState(false);
                 } else {
-                    this.setState({ allPeople: data });
+                    this.setState({ allPeople: data, isSelected: true });
+                    this.setState({ current: this.state.allPeople[0]});
                 }
             })
     }
@@ -122,11 +123,9 @@ class People extends React.Component {
                     {list}
                 </ul>
 
-                <div className={this.state.isSelected ? "show" : "invisible"} >
-                    <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
-                    <button onClick={this.email}>Email</button>
-                    <button onClick={this.assignShift}>Assign Shifts</button>
-                </div>
+                <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
+                <button onClick={this.email}>Email</button>
+                <button onClick={this.assignShift}>Assign Shifts</button>
                 {email}
                 {info}
             </div>

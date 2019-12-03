@@ -11,21 +11,10 @@ var business = require('../models/business');
 // body contains {to, subject, text}
 /* POST to login url: /auth/login */
 router.post('/', verifyToken, async function (req, res) {
-    var email = await business.getEmail(req.body.to);
-    if (email == false || typeof email == "undefined") {
-        console.log("Error: idk");
-        res.json({ error: true });
-    } else {
-        if (email != "") {
-            console.log(email);
-            sendMail(email,
-                    req.body.subject,
-                    req.body.text);
-            res.json({ error: false, sent: true });
-        } else {
-            res.json({ error: false, sent: false });
-        }
-    }
+    sendMail(req.body.to,
+        req.body.subject,
+        req.body.text);
+    res.json({ error: false, sent: true });
 });
 
 // function that actually sends the email

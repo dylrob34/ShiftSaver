@@ -6,24 +6,45 @@ class Email extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            subject: "",
+            content: ""
         }
+
+        this.updateContent = this.updateContent.bind(this);
+        this.updateSubject = this.updateSubject.bind(this);
+        this.send = this.send.bind(this);
+    }
+
+    updateSubject(e) {
+        e.preventDefault();
+        this.setState({subject: e.target.value});
+    }
+
+    updateContent(e) {
+        e.preventDefault();
+        this.setState({content: e.target.value});
     }
 
     send() {
         fetch("http://localhost/sendmail", {
+            method:"POST",
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 authorization: "Bearer " + userToken
-            }
+            },
+            body: JSON.stringify({
+                to: this.props.to,
+                subject: this.state.subject,
+                text: this.state.content,
+            })
         })
             .then((response) => response.json())
             .then((data) => {
                 if (data.loggedIn === false) {
                     updateLoginState(false);
                 } else {
-                    this.setState({ allPeople: data });
+                    this.props.discard();
                 }
             })
     }
@@ -33,9 +54,10 @@ class Email extends React.Component {
             <div>
                 <p>Email to: {this.props.to}</p>
                 <p>Subject: </p>
-                    <input default="Enter Subject" type="text"></input>
+                <input placeholder="Enter Subject" type="text" onChange={this.updateSubject}></input>
                 <p>Content: </p>
-                    <input default="Enter Content" type="text"></input>
+                <textarea placeholder="Enter Content" type="text" onChange={this.updateContent}></textarea>
+                <p></p>
                 <button onClick={this.send}>Send</button>
                 <button onClick={this.props.discard}>Discard</button>
             </div>
