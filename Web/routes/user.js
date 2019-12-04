@@ -5,6 +5,35 @@ var verifyToken = require('./auth').verifyToken;
 var business = require("../models/business");
 
 
+
+
+// create a shift. Required data is the shift_date, start_time, end_time 
+router.post('/createShift', verifyToken, async (req, res) => {
+    var user = await business.getEmployee(req.authData.employee_id);
+    if (user.is_manager == 1) {
+        console.log(req.body);
+        response = await business.getCreateShift(
+            req.body.shift_date,
+            req.body.start_time,
+            req.body.end_time,
+        );
+        console.log("response is", response);
+        if (response) {
+            res.json({ success: true, error: false });
+        } else {
+            res.json({ success: false, error: true });
+        }
+    } else {
+        res.json({ success: false, error: false })
+    }
+});
+
+
+
+
+
+
+
 // creates a user. Required data in the body is shown below in the JSON object given to the createEmployee() method.
 // user needs to be logged in as a manager.
 router.post('/create', verifyToken, async (req, res) => {

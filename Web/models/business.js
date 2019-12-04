@@ -1,5 +1,12 @@
 const dataMethods = require('./data');
 
+
+async function getCreateShift(shift_date, start_time, end_time) {
+    return dataMethods.createShift(shift_date, start_time, end_time);
+}
+
+
+
 function getEmployees() {
     return dataMethods.getEmployees();
 }
@@ -87,5 +94,6 @@ module.exports = {
     getIsAdmin,
     createEmployee,
     getShiftsByEmployee,
-    getShiftsByEmployeeMonth
+    getShiftsByEmployeeMonth,
+    getCreateShift
 }

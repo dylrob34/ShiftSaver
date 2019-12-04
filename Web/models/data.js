@@ -53,34 +53,30 @@ function getEmployees() {
     });  
 }
 
-// create a shift-record by assigning it to an employee
-// function createShiftRecord(shift_id){
 
-// }
-
-
-// function createShift(shift_id,shift_date, start_time, end_time){
-
-//     return new Promise((resolve, reject) => {
-//         connection.query(("INSERT INTO shift values ("
-//         + "'" + shift_id + "'" + ","
-//         + "'" + shift_date + "'" + ","
-//         + "'" + start_time + "'" + ","
-//         + "'" + end_time + "'"
-//         + ")",(error, result) => {
-//             if (error) {
-//                     console.log("error inserting a shift");
-//                     return reject(false);
-//                 } else {
-//                     resolve(result);
-//                 }
-//             }
+function createShift(shift_date, start_time, end_time){
+    return new Promise((resolve, reject) => {
+        connection.query(("INSERT INTO shifts_records values ("
+        + "'" + 1 + "'" + ","
+        + "'" + null + "'" + ","
+        + "'" + shift_date + "'" + ","
+        + "'" + start_time + "'" + ","
+        + "'" + end_time + "'" + ","
+        + ")",(error, result) => {
+            if (error) {
+                    console.log("error inserting a shift");
+                    return reject(false);
+                } else {
+                    console.log("successfuly inserted shift into table")
+                    resolve(result);
+                }
+            }
             
         
-//             ));
-//     });
+            ));
+    });
 
-// } 
+} 
 
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
@@ -225,5 +221,6 @@ function createWholeEmployee(user) {
       createEmployee,
       createWholeEmployee,
       getShiftRecordById,
-      getShiftRecordByEmployeeMonth
+      getShiftRecordByEmployeeMonth,
+      createShift
   };
