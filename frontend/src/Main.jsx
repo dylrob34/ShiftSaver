@@ -12,7 +12,7 @@ class Main extends React.Component {
         this.state = {
             name:""
         };
-        fetch("http://localhost/user/getMyName", {
+        fetch("/user/getMyName", {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

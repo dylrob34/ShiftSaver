@@ -22,7 +22,7 @@ class Profile extends React.Component {
         this.editInfo = this.editInfo.bind(this);
 
         
-    fetch("http://localhost/user/getCurrentUser", {
+    fetch("/user/getCurrentUser", {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
