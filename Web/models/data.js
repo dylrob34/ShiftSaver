@@ -41,6 +41,18 @@ function getEmployees() {
     });
 }
 
+function editEmployee(employee_id, phone, email) {
+    return new Promise((resolve) => {
+        connection.query("UPDATE phone_number=" + phone + ", email=" + email + " IN employee WHERE employee_id=" + employee_id + ";", (error, result) => {
+            if (error) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    })
+}
+
   function getShiftRecordById(id) {
     return new Promise( (resolve, reject) => {
         connection.query("SELECT * FROM shift_record WHERE shift_id='" + id + "'", (error, result) => {
@@ -166,18 +178,6 @@ function getShiftRecordByEmployeeMonth(Employee_id, month) {
 
 function createWholeEmployee(user) {
     return new Promise((resolve, reject) => {
-        console.log("INSERT INTO employee values ("
-            + "'" + user.employee_id + "',"
-            + "'" + user.first_name + "'" + ","
-            + "'" + user.last_name + "'" + ","
-            + "'" + user.middle_inital + "'" + ","
-            + "'" + user.job_title + "'" + ","
-            + "'" + user.email + "'" + ","
-            + user.manager + ","
-            + user.admin + ","
-            + "'" + user.phone + "'" + ","
-            + "'" + user.pass + "'"
-            + ")");
         connection.query("INSERT INTO employee values ("
             + "'" + user.employee_id + "',"
             + "'" + user.first_name + "'" + ","
@@ -201,18 +201,6 @@ function createWholeEmployee(user) {
 
   function createEmployee(employee_id, first_name, last_name, middle_inital, job_title, email, manager, admin, phone, pass) {
     return new Promise( (resolve, reject) => {
-        console.log("INSERT INTO employee values ("
-        + "'" + employee_id + "',"
-        + "'" + first_name + "'" + ","
-        + "'" + last_name + "'" + ","
-        + "'" + middle_inital + "'" + ","
-        + "'" + job_title + "'" + ","
-        + "'" + email + "'" + ","
-        + manager + ","
-        + admin + ","
-        + "'" + phone + "'" + ","
-        + "'" + pass + "'"
-        + ")");
         connection.query("INSERT INTO employee values ("
             + "'" + employee_id + "',"
             + "'" + first_name + "'" + ","
@@ -248,5 +236,6 @@ function createWholeEmployee(user) {
       getShiftRecordByEmployeeMonth,
       createShift,
       deleteShift,
-      updateShift
+      updateShift,
+      editEmployee
   };

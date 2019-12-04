@@ -52,7 +52,6 @@ async function getMobileNumber(id) {
 }
 
 async function getEmail(id) {
-    var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
     var result = await dataMethods.getEmployee(id);
     return result.email;
        
@@ -69,11 +68,9 @@ async function getIsAdmin(id) {
 }
 
 async function editInfo(id, email, phone) {
-    var result = await dataMethods.getEmployee(id);
     var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
     if(validEmailRegex.test(email)){
-        result.email = email
-        result.phone = phone
+        var result = await dataMethods.editEmployee(id, phone, email);
         return result
     }else{
         return {error: 'Invalid Email Edit'}

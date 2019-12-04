@@ -19,21 +19,12 @@ class EditProfile extends React.Component {
             done_editing: false,
         };
 
-        this.cancelEdits = this.cancelEdits.bind(this)
-        this.changeNum = this.changeNum.bind(this)
-        this.chnageEmail = this.chnageEmail.bind(this)
+        this.cancelEdits = this.cancelEdits.bind(this);
+        this.changeNum = this.changeNum.bind(this);
+        this.chnageEmail = this.chnageEmail.bind(this);
+        this.editInformation = this.editInformation.bind(this);
 
-    }
-
-    changeNum(e){
-        this.setState({phone_number: e.target.value})
-    }
-
-    chnageEmail(e){
-        this.setState({email: e.target.value})
-    }
-
-    componentDidMount() {
+        
         fetch("http://localhost/user/getCurrentUser", {
             headers: {
                 Accept: 'application/json',
@@ -58,6 +49,13 @@ class EditProfile extends React.Component {
         })
     }
 
+    changeNum(e){
+        this.setState({phone_number: e.target.value})
+    }
+
+    chnageEmail(e){
+        this.setState({email: e.target.value})
+    }
     cancelEdits(){
         this.setState({done_editing: true})
     }
