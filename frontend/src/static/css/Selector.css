@@ -61,6 +61,7 @@ body {
       color: #fff;
       background: linear-gradient(to right, #9C27B0, #E040FB);
       border: 0;
+      cursor: pointer;
       padding-left: 40px;
       padding-right: 40px;
       padding-bottom: 10px;
@@ -86,9 +87,16 @@ body {
     border-top-right-radius:25px;
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
+    overflow: hidden;
+    padding-bottom: 10%;
   }
 
   .displayItem{
       padding: 20px;
+  }
+
+  #log_out{
+    background: linear-gradient(to right, rgb(176, 176, 39), rgb(251, 214, 64));
+    color: purple;
   }
   

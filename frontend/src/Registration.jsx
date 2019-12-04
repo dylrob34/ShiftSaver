@@ -117,10 +117,10 @@ export class Registration extends React.Component{
     render(){
 
         return(
-        <div className ="regiDiv">
+        <div className ="main_div">
 
             
-            <h1>Create an Account</h1>
+            <h1 className = "title">Create an Account</h1>
             
             <form className= "regiForm">
 
@@ -134,7 +134,8 @@ export class Registration extends React.Component{
               </select>
 
               <p>Employee ID</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="userEmployeeID"
               placeholder="Enter Employee ID"
@@ -142,7 +143,8 @@ export class Registration extends React.Component{
               />
 
               <p>First Name</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="firstName"
               placeholder="Enter First Name"
@@ -150,7 +152,8 @@ export class Registration extends React.Component{
               />
 
               <p>Last Name </p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="lastName"
               placeholder="Enter Last Name"
@@ -158,7 +161,8 @@ export class Registration extends React.Component{
               />
 
               <p>Middle Initial</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="Middle Initial"
               placeholder="Enter Middle Initial"
@@ -166,7 +170,8 @@ export class Registration extends React.Component{
               />
 
               <p>Job Tittle</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="job"
               placeholder="Enter Job Tittle"
@@ -174,7 +179,8 @@ export class Registration extends React.Component{
               />
 
               <p>Phone Number</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="phone"
               placeholder="Enter Phone Number"
@@ -182,7 +188,8 @@ export class Registration extends React.Component{
               />
 
               <p>Email</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="email"
               placeholder="Enter Email"
@@ -190,7 +197,8 @@ export class Registration extends React.Component{
               />
 
               <p>Password</p>
-              <input 
+              <input
+              className = "txt_area" 
               type="text"
               id="userName"
               placeholder="Enter Password"
@@ -201,7 +209,7 @@ export class Registration extends React.Component{
               <br />
 
 
-              <button type= "button" onClick = {this.createAccount}>Create Account !</button>
+              <button className= "sub_btn" type= "button" onClick = {this.createAccount}>Create Account !</button>
 
 
             </form>

@@ -50,7 +50,7 @@ class Selector extends React.Component {
                     <li><button onClick={() => this.changePage("calendar")} >Calendar</button></li>
                     <li> <button onClick={() => this.changePage("people")} >People</button></li>
                     <li><button onClick={() => this.changePage("profile")}>Profile</button></li>
-                    <li><button onClick={this.logout}>Logout</button></li>
+                    <li><button id= "log_out" onClick={this.logout}>Logout</button></li>
                 </ul>
                 </nav>
                 </header>

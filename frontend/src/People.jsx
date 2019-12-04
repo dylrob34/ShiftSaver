@@ -56,6 +56,7 @@ class People extends React.Component {
 
     selectPerson() {
         this.setState({ isSelected: true });
+        this.setState({ addPerson: false });
     }
 
     discard() {
@@ -86,7 +87,7 @@ class People extends React.Component {
             for (var i = 0; i < this.state.allPeople.length; i++) {
                 var text = this.state.allPeople[i].first_name + " " + this.state.allPeople[i].last_name +
                     "\n" + this.state.allPeople[i].phone_number
-                list.push(<li key={i}><button value={i} onClick={e => this.changePerson(e.target.value)}>{text}</button></li >)
+                list.push(<li className = "list"key={i}><button className = "btn_list" value={i} onClick={e => this.changePerson(e.target.value)}>{text}</button></li >)
             }
         }
 
@@ -94,7 +95,7 @@ class People extends React.Component {
 
         if(!this.state.addPerson){
             info = 
-                <div>    
+                <div className = "info">    
                 <h1>{this.state.current.first_name} {this.state.current.last_name}</h1>
                 <br/>
                 <h3>Phone Number: {this.state.current.phone_number}</h3>
@@ -114,17 +115,24 @@ class People extends React.Component {
 
         return (
             <div>
-                <h1>People!</h1>
-                <button onClick={this.infoSection}>Add Employee</button>
-                <ul>
+                <h1 className = "label">People!</h1>
+               <h2><button className= "add_btn" onClick={this.infoSection}>Add Employee</button></h2>
+                <div className = "contDiv">
+                <ul className = "btn_group">
                     {list}
                 </ul>
-
+                <div className="email_sec" >
                 <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
-                <button onClick={this.email}>Email</button>
-                <button onClick={this.assignShift}>Assign Shifts</button>
+                <button className="cont_btn" onClick={this.email}>Email</button>
+                <button className="cont_btn" onClick={this.assignShift}>Assign Shifts</button>
                 {email}
+                </div>
+                </div>
+
+
+                <div className = "infoPos">
                 {info}
+                </div>
             </div>
         );
     }

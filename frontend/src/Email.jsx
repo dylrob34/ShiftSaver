@@ -1,6 +1,7 @@
 import React from 'react';
 import { userToken } from './Login';
 import { updateLoginState } from './MessageStore';
+import './static/css/Email.css';
 
 class Email extends React.Component {
     constructor(props) {
@@ -51,12 +52,12 @@ class Email extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className = "mainSec">
                 <p>Email to: {this.props.to}</p>
                 <p>Subject: </p>
-                <input placeholder="Enter Subject" type="text" onChange={this.updateSubject}></input>
+                <input className = "sub"placeholder="Enter Subject" type="text" onChange={this.updateSubject}></input>
                 <p>Content: </p>
-                <textarea placeholder="Enter Content" type="text" onChange={this.updateContent}></textarea>
+                <textarea className = "tex" placeholder="Enter Content" type="text" onChange={this.updateContent}></textarea>
                 <p></p>
                 <button onClick={this.send}>Send</button>
                 <button onClick={this.props.discard}>Discard</button>

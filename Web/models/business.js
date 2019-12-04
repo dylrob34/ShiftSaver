@@ -66,8 +66,21 @@ async function getIsManager(id) {
 async function getIsAdmin(id) {
     var result = await dataMethods.getEmployee(id);
     return(result.is_admin == 1);
-  
 }
+
+async function editInfo(id, email, phone) {
+    var result = await dataMethods.getEmployee(id);
+    var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
+    if(validEmailRegex.test(email)){
+        result.email = email
+        result.phone = phone
+        return result
+    }else{
+        return {error: 'Invalid Email Edit'}
+    }
+}
+
+
 async function getShiftsByEmployee(selfid, id) {
     if (selfid == id || getIsManager(selfid) || getIsAdmin(selfid)) {
         var result = await dataMethods.getShiftRecordByEmployee(id);
@@ -109,5 +122,6 @@ module.exports = {
     createShift,
     getShiftsByDay,
     deleteShift,
-    updateShift
+    updateShift,
+    editInfo
 }

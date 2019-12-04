@@ -59,4 +59,17 @@ router.get('/getMyName', verifyToken, async (req, res) => {
     res.json({ name });
 });
 
+router.post('/editProfile', verifyToken, async(req, res)=>{
+    var response = await business.editInfo(
+        req.authData.employee_id,
+        req.body.email,
+        req.body.phone);
+        console.log("response is", response);
+        if (response) {
+            res.json({ success: true, error: false });
+        } else {
+            res.json({ success: false, error: true });
+        }
+});
+
 module.exports = router;
