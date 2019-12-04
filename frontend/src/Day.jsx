@@ -40,10 +40,14 @@ class Day extends React.Component {
                 if (data.loggedIn === false) {
                     updateLoginState(false);
                 } else {
-                    if (data.shifts.length > 0) {
-                        this.setState({ shifts: data.shifts });
-                    } else {
-                        this.setState({ shifts: "No Shifts" });
+                    try {
+                        if (data.shifts.length > 0) {
+                            this.setState({ shifts: data.shifts });
+                        } else {
+                            this.setState({ shifts: "No Shifts" });
+                        }
+                    } catch {
+                        this.setState({ shifts: "No Shifts"});
                     }
                 }
             })
@@ -84,12 +88,12 @@ class Day extends React.Component {
                 employee: this.state.id
             })
         })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.loggedIn === false) {
-                updateLoginState(false);
-            }      
-        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.loggedIn === false) {
+                    updateLoginState(false);
+                }
+            })
         this.props.update();
         this.getShifts();
     }

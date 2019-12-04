@@ -73,4 +73,14 @@ router.post('/editProfile', verifyToken, async(req, res)=>{
         }
 });
 
+router.post("/delete", verifyToken, async (req, res) => {
+    const user = business.getIsManager(req.authData.employee_id);
+    if (user) {
+        var response = business.deleteEmployee(req.body.user);
+        res.json({response});
+    } else {
+        res.json({auth: false});
+    }
+})
+
 module.exports = router;

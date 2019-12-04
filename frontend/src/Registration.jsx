@@ -106,7 +106,9 @@ export class Registration extends React.Component{
       .then((data) => {
         if (data.loggedIn === false) {
           updateLoginState(false);
-      }
+        } else {
+          this.props.back();
+        }
       })
       .catch((err) => {
         console.log("Error: unable to connect to server");
@@ -210,6 +212,7 @@ export class Registration extends React.Component{
 
 
               <button className= "sub_btn" type= "button" onClick = {this.createAccount}>Create Account !</button>
+              <button className= "sub_btn" type= "button" onClick = {this.props.back}>Cancel</button>
 
 
             </form>

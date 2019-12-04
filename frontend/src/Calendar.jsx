@@ -141,7 +141,7 @@ class CalendarWidget extends React.Component {
       upcoming = <li><p>No upcoming shifts</p></li>;
     }
 
-    if (this.state.canCreate) {
+    if (this.state.canCreate && this.state.view === "calendar") {
       view.push(<button onClick={this.createShift}>Create Shift</button>)
     }
 

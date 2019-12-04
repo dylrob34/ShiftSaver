@@ -53,6 +53,18 @@ function editEmployee(employee_id, phone, email) {
     })
 }
 
+function deleteEmployee(employee_id) {
+    return new Promise((resolve) => {
+        connection.query("DELETE FROM employee WHERE employee_id=" + employee_id + ";", (error, result) => {
+            if (error) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    })
+}
+
   function getShiftRecordById(id) {
     return new Promise( (resolve, reject) => {
         connection.query("SELECT * FROM shift_record WHERE shift_id='" + id + "'", (error, result) => {
@@ -237,5 +249,6 @@ function createWholeEmployee(user) {
       createShift,
       deleteShift,
       updateShift,
-      editEmployee
+      editEmployee,
+      deleteEmployee
   };

@@ -77,6 +77,11 @@ async function editInfo(id, email, phone) {
     }
 }
 
+async function deleteEmployee(employee_id) {
+    var result = await dataMethods.deleteEmployee(employee_id);
+    return result;
+}
+
 
 async function getShiftsByEmployee(selfid, id) {
     if (selfid == id || getIsManager(selfid) || getIsAdmin(selfid)) {
@@ -120,5 +125,6 @@ module.exports = {
     getShiftsByDay,
     deleteShift,
     updateShift,
-    editInfo
+    editInfo,
+    deleteEmployee
 }

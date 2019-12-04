@@ -31,10 +31,17 @@ class People extends React.Component {
         this.discard = this.discard.bind(this);
         this.infoSection = this.infoSection.bind(this);
         this.getCanCreate = this.getCanCreate.bind(this);
+        this.back = this.back.bind(this);
+        this.delete = this.delete.bind(this);
+        this.update = this.update.bind(this);
 
         this.getCanCreate();
-
+        this.update();
         
+        
+    }
+
+    update() {
         fetch("http://localhost/user/getAllPeople", {
             headers: {
                 Accept: 'application/json',
@@ -67,6 +74,11 @@ class People extends React.Component {
         this.setState({ email: null });
     }
 
+    back() {
+        this.setState({addPerson: false});
+        this.update();
+    }
+
     email() {
         // apply Lucas's function using "this.state.current.email" as an email to be sent to 
         this.setState({ email: this.state.current.email });
@@ -80,6 +92,28 @@ class People extends React.Component {
 
     infoSection() {
         this.setState({ addPerson: true });
+    }
+
+    delete() {
+        fetch("http://localhost/user/delete", {
+            method: "POST",
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: "Bearer " + userToken
+          },
+          body: JSON.stringify({
+              user: this.state.current.employee_id
+          })
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.loggedIn === false) {
+              updateLoginState(false);
+            } else {
+              this.update();
+            }
+          })
     }
 
     getCanCreate() {
@@ -130,7 +164,7 @@ class People extends React.Component {
                 </div>
                 
         }else{
-            info = <Registration />
+            info = <Registration back={this.back} />
         }
 
         var email;
@@ -155,6 +189,14 @@ class People extends React.Component {
                 
                 {email}
                 </div>
+
+                { this.state.canCreate &&
+                    <div className="email_sec" >
+                    <p>Delete {this.state.current.first_name} {this.state.current.last_name}: </p>
+                    <button className="cont_btn" onClick={this.delete}>Delete</button>
+                    </div>
+                }                
+
                 </div>
 
 
