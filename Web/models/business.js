@@ -68,8 +68,8 @@ async function getIsAdmin(id) {
 }
 
 async function editInfo(id, email, phone) {
-    var validEmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
-    if(validEmailRegex.test(email)){
+    var EmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
+    if(EmailRegex.test(email)){
         var result = await dataMethods.editEmployee(id, phone, email);
         return result
     }else{
