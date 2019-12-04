@@ -45,7 +45,7 @@ router.get('/getAllPeople', verifyToken, async (req, res) => {
 
 router.get('/getCurrentUser', verifyToken, async (req, res) => {
     response = await business.getEmployee(req.authData.employee_id);
-    res.json(response);
+    res.json({response});
 });
 
 

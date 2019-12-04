@@ -20,13 +20,8 @@ class Profile extends React.Component {
 
         this.changePerson = this.changePerson.bind(this);
         this.editInfo = this.editInfo.bind(this);
-    }
 
-changePerson(person) {
-    this.setState({current:person});
-}
-
-componentDidMount() {
+        
     fetch("http://localhost/user/getCurrentUser", {
         headers: {
             Accept: 'application/json',
@@ -39,15 +34,20 @@ componentDidMount() {
         if (data.loggedIn === false) {
             updateLoginState(false);
         } else {
-            this.setState({first_name: data.first_name});
-            this.setState({last_name: data.last_name});
-            this.setState({middle_init: data.middle_inital});
-            this.setState({employee_id: data.employee_id});
-            this.setState({job_title: data.job_title});
-            this.setState({phone_number: data.phone});
-            this.setState({email: data.email});    
+            this.setState({first_name: data.response.first_name,
+                last_name: data.response.last_name,
+                middle_init: data.response.middle_init,
+                employee_id: data.response.employee_id,
+                job_title: data.response.job_title,
+                phone_number: data.response.phone_number,
+                email: data.response.email
+            });
         }
     })
+    }
+
+changePerson(person) {
+    this.setState({current:person});
 }
 
 editInfo(){
