@@ -16,6 +16,7 @@ class People extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            canCreate: false,
             current: "",
             allPeople: "",
             isSelected: false,
@@ -29,6 +30,9 @@ class People extends React.Component {
         this.assignShift = this.assignShift.bind(this);
         this.discard = this.discard.bind(this);
         this.infoSection = this.infoSection.bind(this);
+        this.getCanCreate = this.getCanCreate.bind(this);
+
+        this.getCanCreate();
 
         
         fetch("http://localhost/user/getAllPeople", {
@@ -78,6 +82,28 @@ class People extends React.Component {
         this.setState({ addPerson: true });
     }
 
+    getCanCreate() {
+        fetch("http://localhost/user/isManager", {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: "Bearer " + userToken
+          }
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.loggedIn === false) {
+              updateLoginState(false);
+            } else {
+              if (data.response) {
+                this.setState({canCreate: data.response});
+              } else {
+                this.setState({canCreate: false});
+              }
+            }
+          })
+      }
+
 
     render() {
 
@@ -116,15 +142,17 @@ class People extends React.Component {
         return (
             <div>
                 <h1 className = "label">People!</h1>
+                {this.state.canCreate &&
                <h2><button className= "add_btn" onClick={this.infoSection}>Add Employee</button></h2>
+                }
                 <div className = "contDiv">
                 <ul className = "btn_group">
                     {list}
                 </ul>
                 <div className="email_sec" >
-                <p>Contact or assign shifts to {this.state.current.first_name} {this.state.current.last_name}: </p>
+                <p>Contact {this.state.current.first_name} {this.state.current.last_name}: </p>
                 <button className="cont_btn" onClick={this.email}>Email</button>
-                <button className="cont_btn" onClick={this.assignShift}>Assign Shifts</button>
+                
                 {email}
                 </div>
                 </div>
@@ -134,7 +162,7 @@ class People extends React.Component {
                 {info}
                 </div>
             </div>
-        );
+        );//<button className="cont_btn" onClick={this.assignShift}>Assign Shifts</button>
     }
 
 }

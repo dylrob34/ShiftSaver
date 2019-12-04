@@ -90,6 +90,7 @@ class Day extends React.Component {
                 updateLoginState(false);
             }      
         })
+        this.props.update();
         this.getShifts();
     }
 

@@ -12,6 +12,7 @@ class CalendarWidget extends React.Component {
     super(props);
 
     this.state = {
+      canCreate: false,
       view: "calendar",
       date: new Date(),
       upcoming: null,
@@ -23,7 +24,9 @@ class CalendarWidget extends React.Component {
     this.createShift = this.createShift.bind(this);
     this.update = this.update.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.getCanCreate = this.getCanCreate.bind(this);
 
+    this.getCanCreate();
     this.update();
 
   }
@@ -78,6 +81,28 @@ class CalendarWidget extends React.Component {
       })
   }
 
+  getCanCreate() {
+    fetch("http://localhost/user/isManager", {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        authorization: "Bearer " + userToken
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.loggedIn === false) {
+          updateLoginState(false);
+        } else {
+          if (data.response) {
+            this.setState({canCreate: data.response});
+          } else {
+            this.setState({canCreate: false});
+          }
+        }
+      })
+  }
+
   onChange = date => {
     this.setState({ view: "day", day: date });
   }
@@ -96,7 +121,7 @@ class CalendarWidget extends React.Component {
     if (this.state.view === "create") {
       view = <CreateShift cancel={this.back} />
     } else if (this.state.view === "day") {
-      view = <Day back={this.back} day={this.state.day}/>
+      view = <Day back={this.back} day={this.state.day} update={this.update}/>
     } else {
       view = [];
       view.push(<Calendar
@@ -104,7 +129,6 @@ class CalendarWidget extends React.Component {
         value={this.state.date}
         dates={this.state.dates}
       />);
-      view.push(<button onClick={this.createShift}>Create Shift</button>);
     }
 
     var upcoming = [];
@@ -115,6 +139,10 @@ class CalendarWidget extends React.Component {
       }
     } else {
       upcoming = <li><p>No upcoming shifts</p></li>;
+    }
+
+    if (this.state.canCreate) {
+      view.push(<button onClick={this.createShift}>Create Shift</button>)
     }
 
     return (

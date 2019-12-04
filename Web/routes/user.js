@@ -10,10 +10,8 @@ var business = require("../models/business");
 router.post('/create', verifyToken, async (req, res) => {
     var user = await business.getEmployee(req.authData.employee_id);
     if (user.is_manager == 1) {
-        console.log(req.body);
         var hashedPassword = bcrypt.hashSync(req.body.password, 10);
-        console.log(hashedPassword);
-        response = await business.createEmployee(
+        var response = await business.createEmployee(
             req.authData.employee_id,
             req.body.employee_id,
             req.body.first_name,
@@ -39,14 +37,19 @@ router.post('/create', verifyToken, async (req, res) => {
 
 //gets all users from the database
 router.get('/getAllPeople', verifyToken, async (req, res) => {
-    response = await business.getEmployees();
+    var response = await business.getEmployees();
     res.json(response);
 });
 
 router.get('/getCurrentUser', verifyToken, async (req, res) => {
-    response = await business.getEmployee(req.authData.employee_id);
+    var response = await business.getEmployee(req.authData.employee_id);
     res.json({response});
 });
+
+router.get("/isManager", verifyToken, async (req, res) => {
+    var response = await business.getIsManager(req.authData.employee_id);
+    res.json({response});
+})
 
 
 // route returns the name of the current user as a JSON object of the format {name:"name"}
@@ -64,7 +67,6 @@ router.post('/editProfile', verifyToken, async(req, res)=>{
         req.authData.employee_id,
         req.body.email,
         req.body.phone);
-        console.log("response is", response);
         if (response) {
             res.json({ success: true, error: false });
         } else {
