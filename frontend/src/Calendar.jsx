@@ -20,8 +20,13 @@ class CalendarWidget extends React.Component {
 
     this.back = this.back.bind(this);
     this.createShift = this.createShift.bind(this);
+    this.update = this.update.bind(this);
 
+    this.update();
 
+  }
+
+  update() {
     fetch("http://localhost/shift/upcomingShifts", {
       headers: {
         Accept: 'application/json',
@@ -69,7 +74,6 @@ class CalendarWidget extends React.Component {
           }
         }
       })
-
   }
 
   onChange = date => {
@@ -77,6 +81,7 @@ class CalendarWidget extends React.Component {
   }
 
   back() {
+    this.update();
     this.setState({ view: "calendar" });
   }
 

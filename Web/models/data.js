@@ -54,33 +54,31 @@ function getEmployees() {
 }
 
 
-function createShift(shift_date, start_time, end_time){
+function createShift(shift_date, start_time, end_time, employee){
     return new Promise((resolve, reject) => {
-        connection.query(("INSERT INTO shifts_records values ("
-        + "'" + 1 + "'" + ","
-        + "'" + null + "'" + ","
+        connection.query("INSERT INTO shifts_records values("
+        + null + ","
+        + employee + ","
         + "'" + shift_date + "'" + ","
-        + "'" + start_time + "'" + ","
-        + "'" + end_time + "'" + ","
+        + "'" + start_time + ":00:00'" + ","
+        + "'" + end_time + ":00:00'"
         + ")",(error, result) => {
             if (error) {
                     console.log("error inserting a shift");
-                    return reject(false);
                 } else {
-                    console.log("successfuly inserted shift into table")
                     resolve(result);
                 }
             }
             
         
-            ));
+        );
     });
 
 } 
 
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
-        connection.query("select dayname(shift_date) as day, dayofmonth(shift_date) as mydate, hour(start_time) as start, hour(end_time) as end from shift as s, shift_record as sr where sr.employee_id=" + Employee_id + " and sr.shift_id=s.shift_id and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)"+"order by day ASC", (error, result) => {
+        connection.query("select dayname(shift_date) as day, dayofmonth(shift_date) as mydate, hour(start_time) as start, hour(end_time) as end from shifts_records where employee_id=" + Employee_id + " and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)"+"order by day ASC", (error, result) => {
             if (error) {
                     console.log("something broke");
                     return reject(false);
@@ -92,7 +90,7 @@ function getShiftRecordByEmployee(Employee_id) {
 }//select shift_date,start_time,end_time FROM shift as s ,shift_record as sr WHERE s.shift_id = sr.shift_id AND sr.employee_id =" + Employee_id + " AND s.shift_date BETWEEN NOW() AND(NOW() + INTERVAL 14 DAY)
 function getShiftRecordByEmployeeMonth(Employee_id, month) {
     return new Promise((resolve, reject) => {
-        connection.query("select shift_date from shift as s, shift_record as sr where sr.employee_id=" + Employee_id + " and s.shift_id=sr.shift_id and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)", (error, result) => {
+        connection.query("select shift_date from shifts_records where employee_id=" + Employee_id + " and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)", (error, result) => {
             if (error) {
                     console.log("something broke");
                     return reject(false);
@@ -104,13 +102,13 @@ function getShiftRecordByEmployeeMonth(Employee_id, month) {
 }
 
 
-  function getShiftRecordByDate(shift_Date) {
-    return new Promise( (resolve, reject) => {
-        connection.query("SELECT * FROM shift_record WHERE shift_date='" + shift_date + "'", (error, result) => {
+  function getShiftRecordByDate(shift_date) {
+    return new Promise( (resolve) => {
+        connection.query("SELECT * FROM shifts_records WHERE shift_date='" + shift_date + "'", (error, result) => {
             if (error) {
-                return reject(false);
+                resolve(false);
             } else {
-                resolve(result[0]);
+                resolve(result);
             }
         });
     });

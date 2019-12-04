@@ -9,7 +9,7 @@ class CreateShift extends React.Component {
             date: null,
             start: "",
             end: "",
-            empoloyee: ""
+            employee: null
         }
 
         this.onDate = this.onDate.bind(this);
@@ -36,10 +36,14 @@ class CreateShift extends React.Component {
 
     onEmployee(e) {
         e.preventDefault();
-        this.setState({empoloyee: e.target.value});
+        this.setState({employee: e.target.value});
     }
 
     create() {
+        if (this.state.employee === "") {
+            console.log("shit was empty");
+            this.setState({employee: null});
+        }
         fetch("http://localhost/shift/create", {
         method:"POST",
         headers: {
