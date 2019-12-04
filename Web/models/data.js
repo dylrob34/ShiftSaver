@@ -89,6 +89,19 @@ function deleteShift(shift_id) {
     })
 }
 
+function updateShift(shift_id, employee_id) {
+    return new Promise((resolve) => {
+        connection.query("UPDATE shifts_records SET employee_id=" + employee_id + " WHERE shift_id=" + shift_id), (error, result) => {
+            if (error) {
+                console.log("error reassigning shfit");
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        }
+    })
+}
+
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
         connection.query("select dayname(shift_date) as day, dayofmonth(shift_date) as mydate, hour(start_time) as start, hour(end_time) as end from shifts_records where employee_id=" + Employee_id + " and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)"+"order by day ASC", (error, result) => {
@@ -233,5 +246,7 @@ function createWholeEmployee(user) {
       createWholeEmployee,
       getShiftRecordById,
       getShiftRecordByEmployeeMonth,
-      createShift
+      createShift,
+      deleteShift,
+      updateShift
   };

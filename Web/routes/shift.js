@@ -56,9 +56,28 @@ router.post("/day", verifyToken, async (req, res) => {
 })
 
 router.post("/delete", verifyToken, async (req, res) => {
-    var user = await business.getIsManager(req.authDat.employee_id);
+    var user = await business.getIsManager(req.authData.employee_id);
     if (user) {
-        
+        const response = await business.deleteShift(req.body.shift_id);
+        if (response) {
+            res.json({success: true});
+        } else {
+            res.json({success: false});
+        }
+    }
+})
+
+router.post("/update", verifyToken, async (req, res) => {
+    var user = await business.getIsManager(req.authData.employee_id);
+    if (user) {
+        const response = await business.updateShift(req.body.shift_id, req.body.employee);
+        if (response) {
+            res.json({success: true});
+        } else {
+            res.json({success: false});
+        }
+    } else {
+        res.json({success: false});
     }
 })
 

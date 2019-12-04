@@ -10,10 +10,13 @@ class Day extends React.Component {
         super(props);
         this.state = {
             shifts: "No Shifts",
+            id: "",
         }
 
         this.getShifts = this.getShifts.bind(this);
         this.deleteShift = this.deleteShift.bind(this);
+        this.assignShift = this.assignShift.bind(this);
+        this.onID = this.onID.bind(this);
 
         this.getShifts();
 
@@ -47,7 +50,52 @@ class Day extends React.Component {
     }
 
     deleteShift(shift) {
-        
+        fetch("http://localhost/shift/delete", {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                authorization: "Bearer " + userToken
+            },
+            body: JSON.stringify({
+                shift_id: this.state.shifts[shift - 1].shift_id
+            })
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.loggedIn === false) {
+                    updateLoginState(false);
+                } else {
+                    this.getShifts();
+                }
+            })
+    }
+
+    assignShift(shift) {
+        fetch("http://localhost/shift/update", {
+            method: "POST",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                authorization: "Bearer " + userToken
+            },
+            body: JSON.stringify({
+                shift_id: this.state.shifts[shift - 1].shift_id,
+                employee: this.state.id
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.loggedIn === false) {
+                updateLoginState(false);
+            }      
+        })
+        this.getShifts();
+    }
+
+    onID(e) {
+        e.preventDefault();
+        this.setState({ id: e.target.value });
     }
 
     render() {
@@ -65,10 +113,12 @@ class Day extends React.Component {
                 <li><h1>{this.state.shifts} today</h1></li>
             )
         } else {
-            for(var i = 0; i < this.state.shifts.length; i++) {
+            for (i = 0; i < this.state.shifts.length; i++) {
                 shifts.push(
                     <li key={i}><p>{this.state.shifts[i].employee_id}: {this.state.shifts[i].start_time}-{this.state.shifts[i].end_time}</p>
-                    <button onClick={() => this.deleteShift(i)}>Delete</button>
+                        <button onClick={() => this.deleteShift(i)}>Delete</button>
+                        <button onClick={() => this.assignShift(i)}>Assign</button>
+                        <input type="text" placeholder="Enter Employee ID" onChange={this.onID}></input>
                     </li>
                 )
             }
