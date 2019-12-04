@@ -42,7 +42,7 @@ class People extends React.Component {
     }
 
     update() {
-        fetch("/user/getAllPeople", {
+        fetch("http://24.228.154.163:81/user/getAllPeople", {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ class People extends React.Component {
     }
 
     delete() {
-        fetch("/user/delete", {
+        fetch("http://24.228.154.163:81/user/delete", {
             method: "POST",
           headers: {
             Accept: 'application/json',
@@ -117,7 +117,7 @@ class People extends React.Component {
     }
 
     getCanCreate() {
-        fetch("/user/isManager", {
+        fetch("http://24.228.154.163:81/user/isManager", {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',

@@ -76,7 +76,7 @@ class Day extends React.Component {
     }
 
     assignShift(shift) {
-        fetch("/shift/update", {
+        fetch("http://24.228.154.163:81/shift/update", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
