@@ -15,12 +15,14 @@ class CalendarWidget extends React.Component {
       view: "calendar",
       date: new Date(),
       upcoming: null,
-      dates: null
+      dates: null,
+      day: new Date()
     }
 
     this.back = this.back.bind(this);
     this.createShift = this.createShift.bind(this);
     this.update = this.update.bind(this);
+    this.onChange = this.onChange.bind(this);
 
     this.update();
 
@@ -77,7 +79,7 @@ class CalendarWidget extends React.Component {
   }
 
   onChange = date => {
-    this.setState({ view: "day" });
+    this.setState({ view: "day", day: date });
   }
 
   back() {
@@ -94,7 +96,7 @@ class CalendarWidget extends React.Component {
     if (this.state.view === "create") {
       view = <CreateShift cancel={this.back} />
     } else if (this.state.view === "day") {
-      view = <Day back={this.back} />
+      view = <Day back={this.back} day={this.state.day}/>
     } else {
       view = [];
       view.push(<Calendar

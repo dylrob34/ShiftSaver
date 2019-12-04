@@ -6,7 +6,7 @@ async function createShift(shift_date, start_time, end_time, employee) {
 }
 
 async function getShiftsByDay(day) {
-    var shifts = await dataMethods.getShiftsByDate(day);
+    var shifts = await dataMethods.getShiftRecordByDate(day);
     return shifts
 }
 

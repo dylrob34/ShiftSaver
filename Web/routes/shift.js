@@ -45,13 +45,20 @@ router.post("/day", verifyToken, async (req, res) => {
     var user = await business.getIsManager(req.authData.employee_id);
     if (user) {
         var shifts = await business.getShiftsByDay(req.body.day);
-        if (!shifts) {
+        if (shifts != false) {
             res.json({shifts, error: false, auth: true});
         } else {
-            res.json({error: true, auth: true});
+            res.json({shifts, error: true, auth: true});
         }
     } else {
         res.json({error:false, auth: false});
+    }
+})
+
+router.post("/delete", verifyToken, async (req, res) => {
+    var user = await business.getIsManager(req.authDat.employee_id);
+    if (user) {
+        
     }
 })
 

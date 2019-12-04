@@ -76,6 +76,19 @@ function createShift(shift_date, start_time, end_time, employee){
 
 } 
 
+function deleteShift(shift_id) {
+    return new Promise((resolve) => {
+        connection.query("DELETE FROM shifts_records WHERE shift_id=" + shift_id + ";", (error, result) => {
+            if (error) {
+                console.log("error deleting shift");
+                resolve(false);
+            } else {
+                resolve(result);
+            }
+        });
+    })
+}
+
 function getShiftRecordByEmployee(Employee_id) {
     return new Promise((resolve, reject) => {
         connection.query("select dayname(shift_date) as day, dayofmonth(shift_date) as mydate, hour(start_time) as start, hour(end_time) as end from shifts_records where employee_id=" + Employee_id + " and shift_date between date(NOW()) and (date(NOW()) + interval 14 day)"+"order by day ASC", (error, result) => {
