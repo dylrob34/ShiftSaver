@@ -27,7 +27,7 @@ class Email extends React.Component {
     }
 
     send() {
-        fetch("http://24.228.154.163:81/sendmail", {
+        fetch("http://localhost/sendmail", {
             method:"POST",
             headers: {
                 Accept: 'application/json',
