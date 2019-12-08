@@ -27,7 +27,7 @@ class Email extends React.Component {
     }
 
     send() {
-        fetch("http://localhost/sendmail", {
+        fetch("/sendmail", {
             method:"POST",
             headers: {
                 Accept: 'application/json',
