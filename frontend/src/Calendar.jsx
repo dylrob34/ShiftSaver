@@ -32,7 +32,7 @@ class CalendarWidget extends React.Component {
   }
 
   update() {
-    fetch("http://24.228.154.163:81/shift/upcomingShifts", {
+    fetch("http://localhost/shift/upcomingShifts", {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ class CalendarWidget extends React.Component {
       })
 
 
-    fetch("http://24.228.154.163:81/shift/monthlyShifts", {
+    fetch("http://localhost/shift/monthlyShifts", {
       method: "POST",
       headers: {
         Accept: 'application/json',
@@ -82,7 +82,7 @@ class CalendarWidget extends React.Component {
   }
 
   getCanCreate() {
-    fetch("http://24.228.154.163:81/user/isManager", {
+    fetch("http://localhost/user/isManager", {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
