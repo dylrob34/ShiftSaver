@@ -54,7 +54,7 @@ async function getMobileNumber(id) {
 async function getEmail(id) {
     var result = await dataMethods.getEmployee(id);
     return result.email;
-       
+
 }
 
 async function getIsManager(id) {
@@ -64,17 +64,12 @@ async function getIsManager(id) {
 
 async function getIsAdmin(id) {
     var result = await dataMethods.getEmployee(id);
-    return(result.is_admin == 1);
+    return (result.is_admin == 1);
 }
 
 async function editInfo(id, email, phone) {
-    var EmailRegex = "\b[A-Z0 -9._ % +-]+@[A - Z0 - 9. -]+\.[A - Z]{ 2,} \b";
-    if(EmailRegex.test(email)){
-        var result = await dataMethods.editEmployee(id, phone, email);
-        return result
-    }else{
-        return {error: 'Invalid Email Edit'}
-    }
+    var result = await dataMethods.editEmployee(id, phone, email);
+    return result
 }
 
 async function deleteEmployee(employee_id) {
@@ -88,7 +83,7 @@ async function getShiftsByEmployee(selfid, id) {
         var result = await dataMethods.getShiftRecordByEmployee(id);
         return result;
     } else {
-        return {  error:  'Cannot access shifts'  };
+        return { error: 'Cannot access shifts' };
     }
 }
 async function getShiftsByEmployeeMonth(id, month) {
@@ -104,7 +99,7 @@ async function createEmployee(selfid, employee_id, first_name, last_name, middle
         return result;
     } else {
         console.log('Someone without access tried to create an employee and did not have permission to do so')
-        return {error : 'An employee was not able to be created in the database because you do not have permission to do so'}
+        return { error: 'An employee was not able to be created in the database because you do not have permission to do so' }
     }
 }
 module.exports = {

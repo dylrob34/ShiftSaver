@@ -43,7 +43,8 @@ function getEmployees() {
 
 function editEmployee(employee_id, phone, email) {
     return new Promise((resolve) => {
-        connection.query("UPDATE phone_number=" + phone + ", email=" + email + " IN employee WHERE employee_id=" + employee_id + ";", (error, result) => {
+        console.log(email);
+        connection.query("UPDATE employee SET phone_number='" + phone + "', email='" + email + "' WHERE employee_id='" + employee_id + "';", (error, result) => {
             if (error) {
                 resolve(false);
             } else {
