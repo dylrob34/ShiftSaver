@@ -70,7 +70,7 @@ class EditProfile extends React.Component {
               },
               body: JSON.stringify({
                 employee_id: this.state.employee_id,
-                email: this.state.employee_id,
+                email: this.state.email,
                 phone: this.state.phone_number
               })
         })
