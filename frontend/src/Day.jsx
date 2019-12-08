@@ -24,7 +24,11 @@ class Day extends React.Component {
 
     getShifts() {
         const day = this.props.day.getFullYear() + "-" + (this.props.day.getMonth() + 1) + "-" + this.props.day.getDate();
+<<<<<<< HEAD
         fetch("/shift/day", {
+=======
+        fetch("http://shift/day", {
+>>>>>>> UGH
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -54,7 +58,7 @@ class Day extends React.Component {
     }
 
     deleteShift(shift) {
-        fetch("/shift/delete", {
+        fetch("http://localhost/shift/delete", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -76,7 +80,7 @@ class Day extends React.Component {
     }
 
     assignShift(shift) {
-        fetch("/shift/update", {
+        fetch("http://localhost/shift/update", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
