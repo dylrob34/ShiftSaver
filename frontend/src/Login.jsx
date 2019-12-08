@@ -83,7 +83,7 @@ login() {
       } 
       
       
-    return fetch("/auth/login", {
+    return fetch("http://localhost/auth/login", {
       method:"POST",
       headers: {
         Accept: 'application/json',
