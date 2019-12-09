@@ -1,3 +1,9 @@
+/* THIS IS OUTDATED
+employee table is correct,
+adderss was never used,
+and shift_record was changed a few
+times, is no longer correct */
+
 CREATE TABLE EMPLOYEE 
 (employee_id CHAR(7) PRIMARY KEY,
 first_name VARCHAR(15) NOT NULL,
