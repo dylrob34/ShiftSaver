@@ -82,7 +82,7 @@ export class Registration extends React.Component{
     }
 
     createAccount(){
-      fetch("http://localhost/user/create", {
+      fetch("/user/create", {
         method:"POST",
         headers: {
           Accept: 'application/json',

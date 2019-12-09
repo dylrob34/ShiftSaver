@@ -54,7 +54,7 @@ class Day extends React.Component {
     }
 
     deleteShift(shift) {
-        fetch("http://localhost/shift/delete", {
+        fetch("/shift/delete", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
@@ -76,7 +76,7 @@ class Day extends React.Component {
     }
 
     assignShift(shift) {
-        fetch("http://localhost/shift/update", {
+        fetch("/shift/update", {
             method: "POST",
             headers: {
                 Accept: 'application/json',
