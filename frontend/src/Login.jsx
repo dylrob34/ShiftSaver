@@ -82,7 +82,7 @@ login() {
       } 
       
       
-    return fetch("http://24.228.154.163:81/auth/login", {
+    return fetch("http://localhost/auth/login", {
       method:"POST",
       headers: {
         Accept: 'application/json',

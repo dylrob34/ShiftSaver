@@ -25,7 +25,7 @@ class EditProfile extends React.Component {
         this.editInformation = this.editInformation.bind(this);
 
         
-        fetch("http://24.228.154.163:81/user/getCurrentUser", {
+        fetch("http://localhost/user/getCurrentUser", {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ class EditProfile extends React.Component {
     }
 
     editInformation(){
-        fetch('http://24.228.154.163:81/user/editProfile', {
+        fetch('http://localhost/user/editProfile', {
             method: "POST",
             headers: {
                 Accept: 'application/json',
