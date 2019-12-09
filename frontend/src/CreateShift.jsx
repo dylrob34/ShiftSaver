@@ -44,7 +44,7 @@ class CreateShift extends React.Component {
             console.log("shit was empty");
             this.setState({employee: null});
         }
-        fetch("/shift/create", {
+        fetch("http://24.228.154.163:81/shift/create", {
         method:"POST",
         headers: {
           Accept: 'application/json',
